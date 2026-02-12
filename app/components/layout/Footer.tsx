@@ -1,11 +1,123 @@
-import React from 'react'
+import Link from "next/link";
+import Containers from "../ui/Containers";
 
-const Footer = () => {
+const YEARS = [
+  "2017-yil",
+  "2018-yil",
+  "2019-yil",
+  "2020-yil",
+  "2021-yil",
+  "2022-yil",
+  "2023-yil",
+  "2024-yil",
+  "2025-yil",
+  "2026-yil",
+];
+
+export default function Footer() {
   return (
-    <div>
-      Footer
-    </div>
-  )
-}
+    <footer className="border-t border-white/10 bg-gradient-to-b from-[#121417] via-[#0e1012] to-[#0b0c0e]">
+      <Containers className=''>
+        {/* Top */}
+        <div className="grid grid-cols-1 gap-10 py-14 lg:grid-cols-[1.2fr_1fr]">
+          {/* Left: logo + text */}
+          <div>
+            <div className="inline-flex items-center gap-2">
+              {/* Logo (text version – rasmga yaqin) */}
+              <div className="text-[34px] font-extrabold leading-none tracking-tight">
+                <span className="text-white">free</span>
+                <span className="text-[#9dfc2b]">kino</span>
+                <span className="ml-1 rounded-md bg-[#9dfc2b] px-2 py-0.5 text-[18px] font-extrabold text-black align-middle">
+                  net
+                </span>
+              </div>
+            </div>
 
-export default Footer
+            <p className="mt-7 maxx-w-[520px] text-[14px] leading-7 text-white/55">
+              Filmlarga bo&apos;lgan huquq ularning mualliflariga tegishli. Barcha
+              filmlar faqat ma&apos;lumot olish uchun mo&apos;ljallangan.
+              <br />
+              Foydalanuvchilar joylashtirgan noqonuniy materiallar uchun
+              ma&apos;muryat javobgar emas! Har qanday film mualliflik huquqi
+              egasining iltimosiga binoan olib tashlanadi.
+            </p>
+          </div>
+
+          {/* Right: columns */}
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+            {/* Column 1 */}
+            <div>
+              <h4 className="text-[15px] font-semibold text-white/85">
+                Yil bo&apos;yicha seriallar
+              </h4>
+
+              <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2 text-[14px] text-white/55">
+                {YEARS.map((y) => (
+                  <Link
+                    key={`s-${y}`}
+                    href="#"
+                    className="hover:text-white/80 transition"
+                  >
+                    {y}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Column 2 */}
+            <div>
+              <h4 className="text-[15px] font-semibold text-white/85">
+                Yil bo&apos;yicha kinolar
+              </h4>
+
+              <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2 text-[14px] text-white/55">
+                {YEARS.map((y) => (
+                  <Link
+                    key={`k-${y}`}
+                    href="#"
+                    className="hover:text-white/80 transition"
+                  >
+                    {y}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Column 3 */}
+            <div>
+              <h4 className="text-[15px] font-semibold text-white/85">
+                Aloqa / Contact
+              </h4>
+
+              <div className="mt-5 space-y-2 text-[14px] text-white/55">
+                <Link href="#" className="block hover:text-white/80 transition">
+                  Telegram
+                </Link>
+                <Link href="#" className="block hover:text-white/80 transition">
+                  DMCA
+                </Link>
+                <Link href="#" className="block hover:text-white/80 transition">
+                  Правообладателям
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="flex flex-col gap-3 border-t border-white/10 py-5 text-[13px] text-white/45 sm:flex-row sm:items-center sm:justify-between">
+          <div>© 2021-2026 Freekino.net — Barcha huquqlar himoyalangan.</div>
+
+          <div className="flex items-center gap-6">
+            <Link href="#" className="hover:text-white/70 transition">
+              Foydalanish shartlari
+            </Link>
+            <Link href="#" className="hover:text-white/70 transition">
+              Maqolalar / Reklama
+            </Link>
+          </div>
+        </div>
+      </Containers>
+    </footer>
+  );
+}

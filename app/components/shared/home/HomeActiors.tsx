@@ -1,10 +1,11 @@
 import React from 'react'
+import Containers from '../../ui/Containers'
 
 const HomeActiors = () => {
   return (
-    <div>
+    <Containers className=''>
       HomeActiors
-    </div>
+    </Containers>
   )
 }
 

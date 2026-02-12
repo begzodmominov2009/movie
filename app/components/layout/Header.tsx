@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Button from "../ui/Button";
+import Containers from "../ui/Containers";
 
 export default function Header() {
   const [isDark, setIsDark] = useState(true);
@@ -23,8 +24,8 @@ export default function Header() {
   }, [isDark]);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0B0B0D]/95 dark:bg-[#0B0B0D] backdrop-blur-sm">
-      <div className="container mx-auto px-2 sm:px-0 2xl:px-33">
+    <header className="sticky top-0 z-50 bg-gradient-to-b from-[#121417] via-[#0e1012] to-[#0b0c0e] dark:bg-[#0B0B0D] backdrop-blur-sm">
+      <Containers className="" >
         <div className="flex h-16 items-center justify-between gap-4">
           {/* LEFT: logo */}
           <div className="flex items-center gap-4">
@@ -123,7 +124,7 @@ export default function Header() {
             </button>
           </div>
         </div>
-      </div>
+      </Containers>
 
       {/* MOBILE MENU */}
       {openMobile && (

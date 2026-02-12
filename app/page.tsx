@@ -7,11 +7,11 @@ import HomeExtiraMovies from './components/shared/home/HomeExtiraMovies'
 import HomeTopMovies from './components/shared/home/HomeTopMovies'
 import HomeActiors from './components/shared/home/HomeActiors'
 import HomeCountry from './components/shared/home/HomeCountry'
+import Containers from './components/ui/Containers'
 
 const page = () => {
   return (
-    <div>
-      HomePage
+    <>
       <HomeBanner/>
       <HomeGaner/>
       <HomeMovies/>
@@ -19,11 +19,11 @@ const page = () => {
       <HomeExtiraMovies/>
       <HomeTopMovies/>
       <HomeActiors/>
-      <div>
+      <Containers className=''>
         description
-      </div>
+      </Containers>
       <HomeCountry/>
-    </div>
+    </>
   )
 }
 
