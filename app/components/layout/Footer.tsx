@@ -17,7 +17,7 @@ const YEARS = [
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-gradient-to-b from-[#121417] via-[#0e1012] to-[#0b0c0e]">
-      <Containers className=''>
+      <Containers>
         {/* Top */}
         <div className="grid grid-cols-1 gap-10 py-14 lg:grid-cols-[1.2fr_1fr]">
           {/* Left: logo + text */}

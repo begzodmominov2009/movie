@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Grid, Autoplay } from "swiper/modules";
 import type { AutoplayOptions } from "swiper/types";
@@ -60,8 +60,9 @@ export type SwiperSectionProps<T> = {
   loop?: boolean;
   speed?: number;
 
-  items?: T[];
+  items?: Array<T | null | undefined>;
   renderItem?: (item: T, idx: number) => React.ReactNode;
+  getKey?: (item: T, idx: number) => string | number;
 
   children?: React.ReactNode;
 };
@@ -86,6 +87,7 @@ export default function SwiperSection<T = unknown>({
 
   items,
   renderItem,
+  getKey,
   children,
 }: SwiperSectionProps<T>) {
   const isGrid = variant === "grid";
@@ -94,10 +96,26 @@ export default function SwiperSection<T = unknown>({
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
+  // 🔥 Glow state
+  const [activeBtn, setActiveBtn] = useState<"prev" | "next" | null>(null);
+
+  const handleClick = (type: "prev" | "next") => {
+    setActiveBtn(type);
+    setTimeout(() => setActiveBtn(null), 200);
+  };
+
+  // null larni tozalaymiz
+  const safeItems = (Array.isArray(items) ? items : []).filter((x): x is T =>
+    Boolean(x),
+  );
+
   const content =
-    Array.isArray(items) && typeof renderItem === "function"
-      ? items.map((it, idx) => (
-          <SwiperSlide key={(it as any)?.id ?? idx} className="h-auto">
+    safeItems.length && typeof renderItem === "function"
+      ? safeItems.map((it, idx) => (
+          <SwiperSlide
+            key={typeof getKey === "function" ? getKey(it, idx) : idx}
+            className="h-auto"
+          >
             {renderItem(it, idx)}
           </SwiperSlide>
         ))
@@ -115,7 +133,7 @@ export default function SwiperSection<T = unknown>({
         768: { slidesPerView: 1.15 },
         1024: { slidesPerView: Number(visible) || 1 },
       },
-    [heroBreakpoints, visible]
+    [heroBreakpoints, visible],
   );
 
   const gridBp = useMemo<SlidesPerViewBp>(
@@ -126,21 +144,26 @@ export default function SwiperSection<T = unknown>({
       1024: { slidesPerView: cols },
       1280: { slidesPerView: cols },
     }),
-    [cols]
+    [cols],
   );
 
   const autoplayConfig: AutoplayOptions | undefined =
     autoplay === true
       ? { delay: 2500, disableOnInteraction: false, pauseOnMouseEnter: true }
       : typeof autoplay === "object"
-      ? autoplay
-      : undefined;
+        ? autoplay
+        : undefined;
 
   const modules = useMemo(() => {
     const base = isGrid ? [Navigation, Grid] : [Navigation];
     if (autoplayConfig) base.push(Autoplay);
     return base;
   }, [isGrid, autoplayConfig]);
+
+  const glowClass = (type: "prev" | "next") =>
+    activeBtn === type
+      ? "ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.9)]"
+      : "";
 
   return (
     <section className={className}>
@@ -152,17 +175,21 @@ export default function SwiperSection<T = unknown>({
             <div className="hidden md:flex items-center gap-2">
               <button
                 ref={prevRef}
+                onClick={() => handleClick("prev")}
                 type="button"
-                className="cursor-pointer inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 hover:bg-white/8 text-white"
-                aria-label="prev"
+                className={`cursor-pointer transition-all duration-200 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 text-white hover:bg-white/8 ${glowClass(
+                  "prev",
+                )}`}
               >
                 ‹
               </button>
               <button
                 ref={nextRef}
+                onClick={() => handleClick("next")}
                 type="button"
-                className="cursor-pointer inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 hover:bg-white/8 text-white"
-                aria-label="next"
+                className={`cursor-pointer transition-all duration-200 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 text-white hover:bg-white/8 ${glowClass(
+                  "next",
+                )}`}
               >
                 ›
               </button>
@@ -176,17 +203,22 @@ export default function SwiperSection<T = unknown>({
           <>
             <button
               ref={prevRef}
+              onClick={() => handleClick("prev")}
               type="button"
-              className="cursor-pointer absolute left-3 top-1/2 z-10 -translate-y-1/2 h-10 w-10 rounded-full bg-black/40 text-white ring-1 ring-white/10 hover:bg-black/55 backdrop-blur flex items-center justify-center"
-              aria-label="prev"
+              className={`cursor-pointer transition-all duration-200 absolute left-3 top-1/2 z-10 -translate-y-1/2 h-10 w-10 rounded-full bg-black/40 text-white ring-1 ring-white/10 backdrop-blur flex items-center justify-center hover:bg-black/55 ${glowClass(
+                "prev",
+              )}`}
             >
               ‹
             </button>
+
             <button
               ref={nextRef}
+              onClick={() => handleClick("next")}
               type="button"
-              className="cursor-pointer absolute right-3 top-1/2 z-10 -translate-y-1/2 h-10 w-10 rounded-full bg-black/40 text-white ring-1 ring-white/10 hover:bg-black/55 backdrop-blur flex items-center justify-center"
-              aria-label="next"
+              className={`cursor-pointer transition-all duration-200 absolute right-3 top-1/2 z-10 -translate-y-1/2 h-10 w-10 rounded-full bg-black/40 text-white ring-1 ring-white/10 backdrop-blur flex items-center justify-center hover:bg-black/55 ${glowClass(
+                "next",
+              )}`}
             >
               ›
             </button>

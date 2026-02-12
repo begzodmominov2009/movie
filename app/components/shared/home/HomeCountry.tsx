@@ -3,7 +3,7 @@ import Containers from '../../ui/Containers'
 
 const HomeCountry = () => {
   return (
-    <Containers className=''>
+    <Containers>
       HomeCountry
     </Containers>
   )

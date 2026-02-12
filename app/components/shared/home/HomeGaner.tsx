@@ -3,7 +3,7 @@ import Containers from '../../ui/Containers'
 
 const HomeGaner = () => {
   return (
-    <Containers className=''>
+    <Containers>
       Ganer
     </Containers>
   )

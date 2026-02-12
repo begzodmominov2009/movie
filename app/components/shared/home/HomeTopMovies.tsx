@@ -3,7 +3,7 @@ import Containers from '../../ui/Containers'
 
 const HomeTopMovies = () => {
   return (
-    <Containers className=''>
+    <Containers>
       HomeTopMovies
     </Containers>
   )

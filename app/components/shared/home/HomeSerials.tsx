@@ -3,7 +3,7 @@ import Containers from '../../ui/Containers'
 
 const HomeSerials = () => {
   return (
-    <Containers className=''>
+    <Containers>
       HomeSerials
     </Containers>
   )
