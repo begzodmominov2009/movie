@@ -1,6 +1,6 @@
 "use client";
 
-import { Movie } from "@/types/MoviesDataTypes";
+import type { Movie } from "@/types/MoviesDataTypes";
 import Containers from "../../ui/Containers";
 import SwiperSection from "../SwiperSection/SwiperSection";
 import HomeBannerCard from "./components/HomeBanner/HomeBannerCard";
@@ -10,7 +10,7 @@ type Props = {
   visible?: number;
 };
 
-const HomeBanner = ({ movies, visible = 2 }: Props) => {
+export default function HomeBanner({ movies, visible = 2 }: Props) {
   return (
     <Containers className="mt-6">
       <SwiperSection<Movie>
@@ -20,17 +20,15 @@ const HomeBanner = ({ movies, visible = 2 }: Props) => {
         loop
         visible={visible}
         heroBreakpoints={{
-          0: { slidesPerView: 1 }, // ✅ yonidan ko‘rinmasin desang 1
+          0: { slidesPerView: 1.1 },
           640: { slidesPerView: 1.05 },
           768: { slidesPerView: 1.15 },
           1024: { slidesPerView: visible },
         }}
         items={movies}
-        getKey={(m) => m.id} // ✅ id string bo‘lsa ham ok
+        getKey={(m, idx) => (typeof m.id === "number" ? m.id : idx)}
         renderItem={(m) => <HomeBannerCard item={m} />}
       />
     </Containers>
   );
-};
-
-export default HomeBanner;
+}

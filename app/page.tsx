@@ -8,8 +8,8 @@ import HomeTopMovies from "./components/shared/home/HomeTopMovies";
 import HomeActiors from "./components/shared/home/HomeActiors";
 import HomeCountry from "./components/shared/home/HomeCountry";
 import Containers from "./components/ui/Containers";
-import { getMovies } from "@/hooks/useGetMovie";
 import { Movie } from "@/types/MoviesDataTypes";
+import { getMovies } from "@/service/useGetMovie";
 
 const page = async () => {
   const movies: Movie[] = await getMovies();
