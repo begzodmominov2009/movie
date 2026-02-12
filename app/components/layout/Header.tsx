@@ -29,11 +29,6 @@ export default function Header() {
           {/* LEFT: logo */}
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-3">
-              <img
-                src="/logo-light.png" // o'zingizning logongiz yo'li
-                alt="freekino"
-                className="h-8 w-auto rounded-md"
-              />
               <span className="hidden sm:inline-block text-white text-lg font-semibold">
                 freekino<span className="text-lime-400">.net</span>
               </span>
@@ -71,21 +66,21 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/kino"
+              href="/movies"
               className="flex items-center gap-2 rounded-full px-3 py-2 hover:bg-white/5 text-gray-200"
             >
               <Film size={16} /> <span className="text-sm">Kino</span>
             </Link>
 
             <Link
-              href="/serial"
+              href="/serials"
               className="flex items-center gap-2 rounded-full px-3 py-2 hover:bg-white/5 text-gray-200"
             >
               <Tv size={16} /> <span className="text-sm">Serial</span>
             </Link>
 
             <Link
-              href="/multfilm"
+              href="/cartoons"
               className="flex items-center gap-2 rounded-full px-3 py-2 hover:bg-white/5 text-gray-200"
             >
               <Film size={16} /> <span className="text-sm">Multfilm</span>
@@ -94,7 +89,7 @@ export default function Header() {
             {/* theme toggle */}
             <button
               onClick={() => setIsDark((s) => !s)}
-              className="ml-2 rounded-full p-2 hover:bg-white/5 text-gray-200"
+              className="ml-2 rounded-full cursor-pointer p-2 hover:bg-white/5 text-gray-200"
               title="Toggle theme"
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
