@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Containers from "../../ui/Containers";
 import SwiperSection from "../SwiperSection/SwiperSection";
+import { GenerType } from "@/types/GenerTypes";
 
 type Genre = {
   id: number;
@@ -40,7 +41,6 @@ function Pill({
   );
 }
 
-// ✅ iconlar: svg inline (lucide ishlatmasang ham bo‘ladi)
 const IconBolt = (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
     <path
@@ -218,9 +218,12 @@ const GENRES: Genre[] = [
   { id: 10, label: "Kriminal", icon: IconCrime, slug: "crime" },
 ];
 
-export default function HomeGaner() {
-  const [activeId, setActiveId] = useState<number>(1);
+type Props = {
+  ganer: GenerType
+}
 
+export default function HomeGaner({ganer}: Props) {
+  const [activeId, setActiveId] = useState<number>(1);
   return (
     <Containers className="mt-4">
       <SwiperSection<Genre>
@@ -237,12 +240,12 @@ export default function HomeGaner() {
           1024: { slidesPerView: 8.5 },
         }}
         items={GENRES}
-        getKey={(g) => g.id}
-        renderItem={(g) => (
+        getKey={(ganre) => ganre.id}
+        renderItem={(ganre) => (
           <div className="py-1">
-            <Pill active={g.id === activeId} onClick={() => setActiveId(g.id)}>
-              <span className="text-white/90">{g.icon}</span>
-              <span className="text-[14px] font-medium ">{g.label}</span>
+            <Pill active={ganre.id === activeId} onClick={() => setActiveId(ganre.id)}>
+              <span className="text-white/90">{ganre.icon}</span>
+              <span className="text-[14px] font-medium ">{ganre.label}</span>
             </Pill>
           </div>
         )}

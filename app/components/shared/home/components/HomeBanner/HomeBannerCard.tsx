@@ -28,7 +28,7 @@ const HomeBannerCard = ({ item }: Props) => {
         <div className="mt-3 flex flex-wrap gap-2">
           <HomeBannerButton>{item.country}</HomeBannerButton>
           <HomeBannerButton>{item.language}</HomeBannerButton>
-          <HomeBannerButton>{item.description_en}</HomeBannerButton>
+          <HomeBannerButton>{item.release_year}</HomeBannerButton>
         </div>
       </div>
     </div>
