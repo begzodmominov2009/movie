@@ -1,12 +1,23 @@
-import React from 'react'
-import Containers from '../../ui/Containers'
+  import Containers from '../../ui/Containers'
+  import { MovieAktor } from '@/types/MoviesActor'
 
-const HomeActiors = () => {
-  return (
-    <Containers>
-      HomeActiors
-    </Containers>
-  )
-}
 
-export default HomeActiors
+  type Props = {
+    item: MovieAktor
+  }
+
+
+
+  const HomeActiors = ({item}: Props) => {
+  console.log(item);
+
+    return (
+      <Containers>
+        <div className="">
+         page
+        </div>
+      </Containers>
+    )
+  }
+
+  export default HomeActiors
