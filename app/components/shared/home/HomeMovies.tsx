@@ -2,12 +2,18 @@
 
 import React, { useState } from "react";
 import Containers from "../../ui/Containers";
-import HomeMoviesCard from "./components/HomeMovies/HomeMoviesCard";
+import HomeMoviesCard from "../../ui/MoviesCard";
+import MoviesCard from "../../ui/MoviesCard";
+import { Movie } from "@/types/MoviesDataTypes";
 
-const HomeMovies = () => {
+type Props = {
+  movies: Movie[]
+}
+
+const HomeMovies = ({movies}: Props) => {
   return (
     <Containers className="mt-6">
-      <HomeMoviesCard />
+      <MoviesCard movies={movies}/>
     </Containers>
   );
 };

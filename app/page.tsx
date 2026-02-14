@@ -22,7 +22,7 @@ const page = async () => {
     <>
       <HomeBanner movies={movies} />
       <HomeGaner ganer={ganer}/>
-      <HomeMovies />
+      <HomeMovies movies={movies}/>
       <HomeSerials />
       <HomeExtiraMovies />
       <HomeTopMovies />
