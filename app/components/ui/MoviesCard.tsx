@@ -127,7 +127,7 @@ function MovieCard({ item }: MovieCardProps) {
           {item.title_en}
         </h3>
 
-        <p className="mt-1 text-[13px] text-white/55">{item.release_year}</p>
+        <p className="mt-1 text-[13px] text-white/55">{item.created_at}</p>
       </div>
     </div>
   );
