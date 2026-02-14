@@ -1,10 +1,11 @@
 import React from 'react'
+import Containers from '../../ui/Containers'
 
 const HomeSerials = () => {
   return (
-    <div>
+    <Containers>
       HomeSerials
-    </div>
+    </Containers>
   )
 }
 
