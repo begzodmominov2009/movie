@@ -206,7 +206,7 @@ export default function SwiperSection<T = unknown>({
               ref={prevRef}
               onClick={() => handleClick("prev")}
               type="button"
-              className={`cursor-pointer transition-all flex items-center justify-center duration-200 absolute left-3 top-1/2 z-10 -translate-y-1/2 h-10 w-10 rounded-full bg-black/40 text-white ring-1 ring-white/10 backdrop-blur flex items-center justify-center hover:bg-black/55 ${glowClass(
+              className={`cursor-pointer transition-all flex items-center justify-center duration-200 absolute left-1 top-1/2 z-10 -translate-y-1/2 h-10 w-10 rounded-full bg-black/40 text-white ring-2 ring-white/10 backdrop-blur flex items-center justify-center hover:bg-black/55 ${glowClass(
                 "prev",
               )}`}
             >
@@ -217,7 +217,7 @@ export default function SwiperSection<T = unknown>({
               ref={nextRef}
               onClick={() => handleClick("next")}
               type="button"
-              className={`cursor-pointer flex items-center justify-center transition-all duration-200 absolute right-3 top-1/2 z-10 -translate-y-1/2 h-10 w-10 rounded-full bg-black/40 text-white ring-1 ring-white/10 backdrop-blur flex items-center justify-center hover:bg-black/55 ${glowClass(
+              className={`cursor-pointer flex items-center justify-center transition-all duration-200 absolute right-1 top-1/2 z-10 -translate-y-1/2 h-10 w-10 rounded-full bg-black/40 text-white ring-2 ring-white/10 backdrop-blur flex items-center justify-center hover:bg-black/55 ${glowClass(
                 "next",
               )}`}
             >
