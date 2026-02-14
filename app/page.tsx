@@ -36,7 +36,7 @@ const page = async () => {
       </div>
       <HomeSerials />
       <HomeExtiraMovies />
-      <HomeTopMovies />
+      <HomeTopMovies movies={movies} />
       <div>
         <SectionHeader
           title="Aktyorlar"
