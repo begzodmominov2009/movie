@@ -9,9 +9,10 @@ const page = async () => {
 
   return (
     <>
+      
       <MovieHeader />
-      <MoviesCard movies={movies}  className="flex gap-5"/>
-    </>
+      <MoviesCard movies={movies} />
+   </>
   );
 };
 
