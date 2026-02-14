@@ -24,7 +24,7 @@ const page = async () => {
       <HomeGaner ganer={ganer} />
       <div className="mt-5">
         <HomeMoviesHead/>
-        <HomeMovies movies={movies} />
+        <HomeMovies movies={movies}/>
       </div>
       <HomeSerials />
       <HomeExtiraMovies />

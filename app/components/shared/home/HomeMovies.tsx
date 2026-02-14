@@ -29,7 +29,7 @@ const HomeMovies = ({ movies, visible = 1 }: Props) => {
         getKey={(m, idx) => (typeof m.id === "number" ? m.id : idx)}
         renderItem={(m) => (
           <div className="py-1">
-            <MoviesCard movies={movies} className="flex items-center gap-5" />
+            <MoviesCard movies={movies} className="flex items-center gap-3" />
           </div>
         )}
       />

@@ -85,7 +85,7 @@ export default function SwiperSection<T = unknown>({
   autoplay = false,
   loop = false,
   speed = 450,
-
+  
   items,
   renderItem,
   getKey,

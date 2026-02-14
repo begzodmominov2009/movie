@@ -138,10 +138,10 @@ function MovieCard({ item }: MovieCardProps) {
 
 export default function MoviesCard({ movies, className = "" }: MoviesCardProps) {
   return (
-      <Containers className={className}>
+      <div className={className}>
         {movies?.map((item) => (
           <MovieCard key={item.id ?? item.title_en} item={item} />
         ))}
-      </Containers>
+      </div>
   );
 }
