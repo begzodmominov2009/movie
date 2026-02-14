@@ -7,15 +7,11 @@ import MoviesCard from "../../ui/MoviesCard";
 import { Movie } from "@/types/MoviesDataTypes";
 
 type Props = {
-  movies: Movie[]
-}
+  movies: Movie[];
+};
 
-const HomeMovies = ({movies}: Props) => {
-  return (
-    <Containers className="mt-6">
-      <MoviesCard movies={movies}/>
-    </Containers>
-  );
+const HomeMovies = ({ movies }: Props) => {
+  return <MoviesCard movies={movies} />;
 };
 
 export default HomeMovies;
