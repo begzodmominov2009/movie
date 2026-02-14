@@ -12,19 +12,25 @@ import { Movie } from "@/types/MoviesDataTypes";
 import { getMovies } from "@/service/useGetMovie";
 import { GenerType } from "@/types/GenerTypes";
 import { getGener } from "@/service/useGetGanre";
-import HomeMoviesHead from "./components/shared/home/components/HomeMovies/HomeMoviesHead";
+import SectionHeader from "./components/ui/SectionHead";
 
 const page = async () => {
   const movies: Movie[] = await getMovies();
   const ganer: GenerType[] = await getGener();
+  console.log(ganer);
 
   return (
     <>
       <HomeBanner movies={movies} />
       <HomeGaner ganer={ganer} />
       <div className="mt-5">
-        <HomeMoviesHead/>
-        <HomeMovies movies={movies}/>
+        <SectionHeader
+          title="Yangi tarjima kinolar"
+          iconUrl="https://unpkg.com/lucide-static/icons/zap.svg"
+          actionLabel="barchasi"
+          actionHref="/movies"
+        />
+        <HomeMovies movies={movies} />
       </div>
       <HomeSerials />
       <HomeExtiraMovies />
