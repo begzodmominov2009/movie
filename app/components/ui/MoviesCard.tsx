@@ -138,12 +138,10 @@ function MovieCard({ item }: MovieCardProps) {
 
 export default function MoviesCard({ movies, className = "" }: MoviesCardProps) {
   return (
-    <div className={className}>
-      <Containers className="flex gap-5">
+      <Containers className={className}>
         {movies?.map((item) => (
           <MovieCard key={item.id ?? item.title_en} item={item} />
         ))}
       </Containers>
-    </div>
   );
 }
