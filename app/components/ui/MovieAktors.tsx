@@ -4,7 +4,7 @@ function MovieAktors() {
   return (
     <>
     <Containers className="">
-        
+
     </Containers>
     </>
   )
