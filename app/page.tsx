@@ -10,14 +10,18 @@ import HomeCountry from "./components/shared/home/HomeCountry";
 import Containers from "./components/ui/Containers";
 import { Movie } from "@/types/MoviesDataTypes";
 import { getMovies } from "@/service/useGetMovie";
+import { GenerType } from "@/types/GenerTypes";
+import { getGener } from "@/service/useGetGanre";
 
 const page = async () => {
   const movies: Movie[] = await getMovies();
+  const ganer: GenerType[] = await getGener();
+  
 
   return (
     <>
-      <HomeBanner  movies={movies}/>
-      <HomeGaner/>
+      <HomeBanner movies={movies} />
+      <HomeGaner ganer={ganer}/>
       <HomeMovies />
       <HomeSerials />
       <HomeExtiraMovies />

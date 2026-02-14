@@ -1,12 +1,15 @@
-import React from 'react'
-import Containers from '../../ui/Containers'
+"use client";
+
+import React, { useState } from "react";
+import Containers from "../../ui/Containers";
+import HomeMoviesCard from "./components/HomeMovies/HomeMoviesCard";
 
 const HomeMovies = () => {
   return (
-    <Containers>
-      HomeMovies
+    <Containers className="mt-6">
+      <HomeMoviesCard />
     </Containers>
-  )
-}
+  );
+};
 
-export default HomeMovies
+export default HomeMovies;
