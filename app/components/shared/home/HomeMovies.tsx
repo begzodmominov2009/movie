@@ -15,14 +15,14 @@ const HomeMovies = ({ movies, visible = 1 }: Props) => {
     <Containers>
       <SwiperSection<Movie>
         variant="hero"
-        gap={25}
+        gap={480}
         loop
         visible={visible}
         heroBreakpoints={{
-          0: { slidesPerView: 1.2 },
-          480: { slidesPerView: 2.2 },
-          640: { slidesPerView: 2.6 },
-          768: { slidesPerView: 3.2 },
+          0: { slidesPerView: 1 },
+          480: { slidesPerView: 1 },
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 1 },
           1024: { slidesPerView: visible },
         }}
         items={movies}
