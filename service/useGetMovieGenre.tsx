@@ -1,6 +1,6 @@
-import { MovieAktor } from "@/types/MoviesActor";
+import { MovieGenre } from "@/types/MovieGanre";
 
-export async function getAktor(): Promise<MovieAktor[]> {
+export async function getMovieGenre(): Promise<MovieGenre[]> {
   const res = await fetch(
     "https://x8ki-letl-twmt.n7.xano.io/api:j6hO02gL/movie_genre",
     { cache: "no-store" },

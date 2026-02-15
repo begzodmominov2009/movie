@@ -7,15 +7,25 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 import MetaItem from "./MetaItem";
-import { DEMO_GENRES, minutesToText, safe } from "./MovieSingleUtils";
+import { safe } from "./MovieSingleUtils";
+import { GenerType } from "@/types/GenerTypes";
+import Duration from "@/app/components/ui/Duration";
+import { MovieAktor } from "@/types/MoviesActor";
+import Link from "next/link";
+
+type Props = {
+  movie: Movie;
+  title: string;
+  ganreMovie: GenerType[];
+  movieActor: MovieAktor[];
+};
 
 export default function MovieHeroCard({
   movie,
   title,
-}: {
-  movie: Movie;
-  title: string;
-}) {
+  ganreMovie,
+  movieActor,
+}: Props) {
   return (
     <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5">
       <div className="absolute inset-0">
@@ -38,7 +48,6 @@ export default function MovieHeroCard({
             <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/30">
               <div className="aspect-[2/3]">
                 {movie.poster_url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={movie.poster_url}
                     alt={title}
@@ -94,7 +103,7 @@ export default function MovieHeroCard({
               <MetaItem
                 icon={<FaClock />}
                 label="Davomiyligi:"
-                value={minutesToText(movie.duration_minutes)}
+                value={<Duration minutes={movie.duration_minutes} />}
               />
               <MetaItem
                 icon={<FaGlobe />}
@@ -104,38 +113,47 @@ export default function MovieHeroCard({
             </div>
 
             <div className="mt-3 flex flex-wrap items-center gap-2">
-              <div className="text-white/60 text-sm mr-1">Janrlar:</div>
-              {DEMO_GENRES.map((g) => (
-                <span
-                  key={g}
-                  className="inline-flex items-center rounded-full bg-black/30 border border-white/10 px-3 py-1 text-xs text-white/80"
-                >
-                  {g}
-                </span>
-              ))}
+              <div className="text-white font-medium text-sm mr-1">
+                Janrlar:
+              </div>
+              {ganreMovie?.length ? (
+                ganreMovie.map((el) => (
+                  <span
+                    key={el.id}
+                    className="inline-flex items-center rounded-full b-black/30 border border-white/10 px-3 py-1 text-xs text-white"
+                  >
+                    {el.name_uz || el.name_ru || el.name_en || "—"}
+                  </span>
+                ))
+              ) : (
+                <span className="text-xs text-white">Janr topilmadi</span>
+              )}
             </div>
           </div>
         </div>
 
         {/* demo cast */}
-        <div className="mt-5 flex items-center gap-3 overflow-x-auto pb-1">
-          {[
-            { name: "Sydney Sweeney", role: "Millie Calloway" },
-            { name: "Amanda Seyfried", role: "Nina Winchester" },
-            { name: "Brandon Sklenar", role: "Andrew Winchester" },
-            { name: "Michele Morrone", role: "Enzo" },
-            { name: "India", role: "Cece" },
-          ].map((p) => (
-            <div
-              key={p.name}
-              className="shrink-0 flex items-center gap-3 rounded-2xl border border-white/10 bg-black/25 px-3 py-2"
+        <div
+          className="mt-5 flex items-center gap-3 overflow-x-auto  custom-scroll
+    rounded
+    max-h-[385px]
+    overflow-y-auto
+     pb-1"
+        >
+          {movieActor.map((p) => (
+            <Link href={`/actors/${p.id}`}
+              key={p.full_name}
+              className="shrink-0 cursor-pointer flex items-center gap-3 rounded-2xl border border-white/10 bg-black/25 px-5 py-2"
             >
-              <div className="h-9 w-9 rounded-xl bg-white/10" />
+              <img
+                src={p.photo_url}
+                className="h-14 w-14 object-cover rounded-xl bg-white/10"
+              />
               <div className="leading-tight">
-                <div className="text-sm font-semibold">{p.name}</div>
-                <div className="text-xs text-white/60">{p.role}</div>
+                <div className="text-sm font-semibold">{p.full_name}</div>
+                <div className="text-xs text-white/60">{p.country}</div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
