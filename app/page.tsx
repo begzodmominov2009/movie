@@ -15,12 +15,14 @@ import SectionHeader from "./components/ui/SectionHead";
 import { MovieAktor } from "@/types/MoviesActor";
 import { getAktor } from "@/service/useGetMovieActors";
 import HomeActiors from "./components/shared/home/HomeActiors";
+import { MovieGenre } from "@/types/MovieGanre";
+import { getMovieGenre } from "@/service/useGetMovieGenre";
 
 const page = async () => {
   const movies: Movie[] = await getMovies();
   const ganer: GenerType[] = await getGener();
   const aktors: MovieAktor[] = await getAktor();
-
+  
   return (
     <>
       <HomeBanner movies={movies} />

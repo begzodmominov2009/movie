@@ -5,14 +5,12 @@ export default function SingleMovieSkeleton() {
     <div className="min-h-screen bg-[#0b0b0f] text-white">
       <div className="px-4 md:px-8 py-6">
         <div className="mx-auto max-w-7xl grid grid-cols-12 gap-6">
-          {/* LEFT */}
           <div className="col-span-12 lg:col-span-9">
             <HeroSkeleton />
             <PlayerSkeleton />
             <InfoSkeleton />
           </div>
 
-          {/* RIGHT */}
           <aside className="col-span-12 lg:col-span-3">
             <RecommendedSkeleton />
           </aside>
@@ -21,8 +19,6 @@ export default function SingleMovieSkeleton() {
     </div>
   );
 }
-
-/* ---------- pieces ---------- */
 
 function HeroSkeleton() {
   return (
@@ -34,7 +30,6 @@ function HeroSkeleton() {
 
       <div className="relative p-5 md:p-6">
         <div className="flex gap-5">
-          {/* Poster */}
           <div className="w-[140px] md:w-[170px] shrink-0">
             <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/30">
               <div className="aspect-[2/3]">
@@ -43,7 +38,6 @@ function HeroSkeleton() {
             </div>
           </div>
 
-          {/* Content */}
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 w-full">
@@ -75,7 +69,7 @@ function HeroSkeleton() {
           </div>
         </div>
 
-        <div className="mt-5 flex items-center gap-3 pb-1">
+        <div className="mt-5 flex items-center gap-3 pb-1 overflow-x-auto">
           {Array.from({ length: 5 }).map((_, i) => (
             <div
               key={i}
@@ -97,7 +91,7 @@ function HeroSkeleton() {
 function PlayerSkeleton() {
   return (
     <div className="mt-6 rounded-3xl overflow-hidden border border-white/10 bg-white/5">
-      <Skeleton className="w-full h-[240px] md:h-[380px] rounded-none bg-white/5" />
+      <Skeleton className="w-full h-[240px] md:h-[380px] rounded-none" />
 
       <div className="p-4 md:p-5 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -149,7 +143,7 @@ function RecommendedSkeleton() {
       </div>
 
       <div className="px-3 pb-3 space-y-3">
-        {Array.from({ length: 3 }).map((_, i) => (
+        {Array.from({ length: 6 }).map((_, i) => (
           <div
             key={i}
             className="flex gap-3 rounded-2xl border border-white/10 bg-black/25 p-3"
