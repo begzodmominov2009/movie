@@ -19,7 +19,7 @@ const HomeActiors = ({ aktors, visible = 6 }: Props) => {
         loop
         visible={visible}
         heroBreakpoints={{
-          0: { slidesPerView: 1.2 },
+          0: { slidesPerView: 1.5 },
           480: { slidesPerView: 2.2 },
           640: { slidesPerView: 3.2 },
           768: { slidesPerView: 4.2 },

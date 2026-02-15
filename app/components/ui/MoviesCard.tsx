@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import type { Movie } from "@/types/MoviesDataTypes";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import { MovieGenre } from "@/types/MovieGanre";
 
 const StarIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -33,14 +34,21 @@ const ClockIcon = () => (
 
 type Props = {
   item: Movie;
+  movie_filtered?: Movie[]
+  ganer_name_cartoons?: string;
+  ganer_name_movie?: string;
 };
 
-export default function MovieCard({ item }: Props) {
+export default function MovieCard({
+  item,
+  ganer_name_cartoons,
+  ganer_name_movie,
+}: Props) {
   const [hover, setHover] = useState(false);
 
   return (
     <Link
-      href={`/movies/${item.id}`}
+      href={`/movies/${item?.id}`}
       prefetch
       className="block w-full"
       onMouseEnter={() => setHover(true)}
@@ -57,8 +65,8 @@ export default function MovieCard({ item }: Props) {
       >
         <div className="aspect-[4/5]">
           <img
-            src={item.poster_url}
-            alt={item.title_uz || item.title_uz || "Movie"}
+            src={item?.poster_url}
+            alt={item?.title_uz || item?.title_uz || "Movie"}
             loading="lazy"
             className={[
               "h-full w-full object-cover transition duration-300",
@@ -67,18 +75,14 @@ export default function MovieCard({ item }: Props) {
           />
         </div>
 
-        <span className="absolute left-2 top-2 rounded-lg bg-red-500 px-2 py-[2px] text-[11px] font-semibold text-white shadow">
-          NEW
-        </span>
-
         <span className="absolute right-2 top-2 inline-flex items-center gap-[1px] rounded-full bg-black/55 px-2 py-[2px] text-[12px] font-semibold text-white ring-1 ring-white/10 backdrop-blur">
           <StarIcon />
-          {item.imdb_rating ?? "—"}
+          {item?.imdb_rating ?? "—"}
         </span>
 
         <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-black/55 px-2 py-1 text-[12px] font-medium text-white ring-1 ring-white/10 backdrop-blur">
           <ClockIcon />
-          {item.duration_minutes ?? "—"} min
+          {item?.duration_minutes ?? "—"} min
         </span>
 
         <div
@@ -99,10 +103,11 @@ export default function MovieCard({ item }: Props) {
 
       <div className="mt-4">
         <h3 className="line-clamp-1 text-[16px] sm:text-[17px] md:text-[18px] font-semibold text-white leading-tight">
-          {item.title_uz || item.title_uz || item.title_ru || "—"}
+          {item?.title_uz || item?.title_uz || item?.title_ru || "—"}
         </h3>
         <p className="mt-1 text-[13px] text-white/55">
-          {item.created_by ?? "—"}
+          {item?.created_by} : {ganer_name_cartoons}{" "}
+          {ganer_name_movie}
         </p>
       </div>
     </Link>

@@ -49,11 +49,11 @@ export default function HomeGaner({ ganer }: Props) {
         loop
         visible={6.5}
         heroBreakpoints={{
-          0: { slidesPerView: 2.2 },
+          0: { slidesPerView: 2 },
           480: { slidesPerView: 3.2 },
           640: { slidesPerView: 4.2 },
           768: { slidesPerView: 5.2 },
-          1024: { slidesPerView: 8.5 },
+          1024: { slidesPerView: 8 },
         }}
         items={ganer}
         getKey={(g) => g?.id}

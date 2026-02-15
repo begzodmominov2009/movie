@@ -7,7 +7,7 @@ export function minutesToText(min?: number) {
   if (!min) return "—";
   const h = Math.floor(min / 60);
   const m = min % 60;
-  return h ? `${h} s. ${m} min` : `${m} min`;
+  return h ? `${h} soat ${m} min` : `${m} min`;
 }
 
 export const DEMO_GENRES = ["Triller", "Tarjima kinolar", "Mistik"];

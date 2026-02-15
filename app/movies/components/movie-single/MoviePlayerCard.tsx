@@ -10,7 +10,7 @@ export default function MoviePlayerCard({
   title: string;
 }) {
   return (
-    <div className="mt-6 rounded-3xl overflow-hidden border border-white/10 bg-white/5">
+    <div id="movie-player" className="mt-6 scroll-mt-28 md:scroll-mt-32 rounded-3xl overflow-hidden border border-white/10 bg-white/5">
       <div className="p-3 md:p-4">
         {movie.video_url ? (
           <YoutubePlayerClient url={movie.video_url} title={title} />

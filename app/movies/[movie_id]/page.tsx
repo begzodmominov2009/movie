@@ -17,12 +17,10 @@ import { getAktor } from "@/service/useGetMovieActors";
 import { getMovies } from "@/service/useGetMovie";
 
 type PageProps = {
-  // ✅ Next.js 16.1 + Turbopack: params ba'zan Promise bo'lib keladi
   params: Promise<{ movie_id: string }>;
 };
 
 export default async function Page({ params }: PageProps) {
-  // ✅ params ni ochib olamiz
   const { movie_id: movieId } = await params;
   const movie_genre: MovieGenre[] = await getMovieGenre();
   const movies: Movie[] = await getMovies();

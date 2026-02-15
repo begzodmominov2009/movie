@@ -21,13 +21,9 @@ export default function RecommendedSidebar({
 
   const ganreMovieId = ganreMovie?.[0]?.id;
 
-  const filteredMovieIds =
-    movie_genre
-      ?.filter((x) => x.genre_id === ganreMovieId)
-      ?.map((x) => String(x.movie_id)) ?? [];
+  const filteredMovieIds =movie_genre?.filter((x) => x.genre_id === ganreMovieId)?.map((x) => String(x.movie_id)) ?? [];
 
-  const movieFiltered =
-    movies?.filter((m) => filteredMovieIds.includes(String(m.id))) ?? [];
+  const movieFiltered =movies?.filter((m) => filteredMovieIds.includes(String(m.id))) ?? [];
 
   return (
     <div className="relative rounded-3xl max-h-[385px] overflow-hidden border border-white/10 bg-white/5">
@@ -41,7 +37,11 @@ export default function RecommendedSidebar({
       )}
 
       <div className="p-4 font-semibold flex items-center gap-2">
-        ✨ Tavsiyalar
+        <img
+          src="https://api.iconify.design/lucide/sparkles.svg?color=white"
+          alt="Star"
+        />
+        Tavsiyalar
       </div>
 
       <div className="px-3 pb-3 space-y-3 max-h-[330px] overflow-y-auto custom-scroll">
