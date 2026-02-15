@@ -68,7 +68,7 @@ export default function RecommendedSidebar({
               </div>
 
               <div className="text-xs text-white/60 mt-1">
-                {r.release_year ?? "—"} • {r.duration_minutes ?? "—"} daq
+                {r.created_by ?? "—"} • {r.duration_minutes ?? "—"} daq
               </div>
 
               {/* janrlarni chip qilib chiqaramiz */}

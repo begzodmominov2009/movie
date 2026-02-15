@@ -1,61 +1,66 @@
 import type { Movie } from "@/types/MoviesDataTypes";
 import { getSingleMovie } from "@/service/useGetSingleMovie";
+
+import RecommendedSidebar from "../components/movie-single/RecommendedSidebar";
+import MovieHeroCard from "../components/movie-single/MovieHeroCard";
+import MoviePlayerCard from "../components/movie-single/MoviePlayerCard";
+import MovieInfoAccordion from "../components/movie-single/MovieInfoAccordion";
+import SingleMovieSkeleton from "../components/movie-single/SingleMovieSkeleton";
 import { getMovieGenre } from "@/service/useGetMovieGenre";
 import { getGener } from "@/service/useGetGanre";
+import { GenerType } from "@/types/GenerTypes";
+import { MovieGenre } from "@/types/MovieGanre";
+import { movieActor } from "@/types/movie_actor";
 import { getMovieActor } from "@/service/useGetMovie_Actors";
+import { MovieAktor } from "@/types/MoviesActor";
 import { getAktor } from "@/service/useGetMovieActors";
 import { getMovies } from "@/service/useGetMovie";
 
-import type { GenerType } from "@/types/GenerTypes";
-import type { MovieGenre } from "@/types/MovieGanre";
-import type { movieActor } from "@/types/movie_actor";
-import type { MovieAktor } from "@/types/MoviesActor";
-
-import MovieInfoAccordion from "../components/movie-single/MovieInfoAccordion";
-import MovieHeroCard from "../components/movie-single/MovieHeroCard";
-import MoviePlayerCard from "../components/movie-single/MoviePlayerCard";
-import RecommendedSidebar from "../components/movie-single/RecommendedSidebar";
-
 type PageProps = {
-  params: Promise<{ movie_id: string }>; // ✅ Next 16.1 Turbopack
+  // ✅ Next.js 16.1 + Turbopack: params ba'zan Promise bo'lib keladi
+  params: Promise<{ movie_id: string }>;
 };
 
 export default async function Page({ params }: PageProps) {
+  // ✅ params ni ochib olamiz
   const { movie_id: movieId } = await params;
+  const movie_genre: MovieGenre[] = await getMovieGenre();
+  const movies: Movie[] = await getMovies();
+  const movie_actor: movieActor[] = await getMovieActor();
+  const movie_all_actor: MovieAktor[] = await getAktor();
+  const ganre: GenerType[] = await getGener();
 
-  const [movie_genre, movies, movie_actor, movie_all_actor, ganre, movie] =
-    await Promise.all([
-      getMovieGenre() as Promise<MovieGenre[]>,
-      getMovies() as Promise<Movie[]>,
-      getMovieActor() as Promise<movieActor[]>,
-      getAktor() as Promise<MovieAktor[]>,
-      getGener() as Promise<GenerType[]>,
-      getSingleMovie(movieId) as Promise<Movie>,
-    ]);
+  const movieIdGenre = movie_genre?.map((el) => {
+    if (el.movie_id === movieId) {
+      return el.genre_id;
+    }
+  });
+  const ganreMovie = ganre?.filter((item) => movieIdGenre?.includes(item.id));
 
-  if (!movie) {
+  const movieIdActor = movie_actor?.map((el) => {
+    if (el.movie_id === movieId) {
+      return el.actor_id;
+    }
+  });
+  const movieActor = movie_all_actor?.filter((el) =>
+    movieIdActor?.includes(el.id),
+  );
+
+  let movie: Movie | null = null;
+
+  try {
+    movie = await getSingleMovie(movieId);
+  } catch (e) {
     return (
       <div className="min-h-screen bg-[#0b0b0f] text-white p-6">
         <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-red-400">
-          Movie not found
+          Movie fetch error
         </div>
       </div>
     );
   }
 
-  const movieGenreIds = movie_genre
-    .filter((el) => String(el.movie_id) === String(movieId))
-    .map((el) => el.genre_id);
-
-  const ganreMovie = ganre.filter((g) => movieGenreIds.includes(g.id));
-
-  const movieActorIds = movie_actor
-    .filter((el) => String(el.movie_id) === String(movieId))
-    .map((el) => el.actor_id);
-
-  const movieActorList = movie_all_actor.filter((a) =>
-    movieActorIds.includes(a.id),
-  );
+  if (!movie) return <SingleMovieSkeleton />;
 
   const title = movie.title_uz || movie.title_en || movie.title_ru || "—";
   const description =
@@ -69,7 +74,7 @@ export default async function Page({ params }: PageProps) {
             <MovieHeroCard
               movie={movie}
               ganreMovie={ganreMovie}
-              movieActor={movieActorList}
+              movieActor={movieActor}
               title={title}
             />
             <MoviePlayerCard movie={movie} title={title} />
