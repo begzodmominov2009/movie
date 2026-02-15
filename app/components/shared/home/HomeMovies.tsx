@@ -15,20 +15,20 @@ const HomeMovies = ({ movies, visible = 6 }: Props) => {
     <Containers>
       <SwiperSection<Movie>
         variant="hero"
-        gap={0}
+        gap={20}
         loop
         visible={visible}
         heroBreakpoints={{
-          0: { slidesPerView: 1.2 },
-          480: { slidesPerView: 1.6 },
-          640: { slidesPerView: 2.2 },
-          768: { slidesPerView: 3.2 },
+          0: { slidesPerView: 1.8 },
+          480: { slidesPerView: 2.8 },
+          640: { slidesPerView: 3 },
+          768: { slidesPerView: 3.7 },
           1024: { slidesPerView: visible },
         }}
         items={movies}
         getKey={(m, idx) => (m?.id ? String(m.id) : String(idx))}
         renderItem={(m) => (
-          <div className="py-1">
+          <div className="py-1 gap-0">
             <MovieCard item={m} />
           </div>
         )}

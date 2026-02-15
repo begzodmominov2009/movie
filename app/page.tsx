@@ -18,7 +18,6 @@ import HomeActiors from "./components/shared/home/HomeActiors";
 
 const page = async () => {
   const movies: Movie[] = await getMovies();
-  
   const ganer: GenerType[] = await getGener();
   const aktors: MovieAktor[] = await getAktor();
 
