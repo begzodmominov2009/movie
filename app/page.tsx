@@ -28,7 +28,7 @@ const page = async () => {
       </div>
       <HomeSerials />
       <HomeExtiraMovies />
-      <HomeTopMovies />
+      <HomeTopMovies movies={movies}/>
       <HomeActiors />
       <Containers>description</Containers>
       <HomeCountry />
