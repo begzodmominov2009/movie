@@ -1,10 +1,20 @@
-import React from 'react'
+import { MovieAktor } from '@/types/MoviesActor';
+import Containers from '../components/ui/Containers';
 
-const page = () => {
+
+type Props = {
+  aktors: MovieAktor[];
+};
+
+
+const page = ({aktors}:{aktors: Props}) => {
+
+  
+
   return (
-    <div>
-      page
-    </div>
+    <Containers className=''>
+       <h1 className='text-white'>Aktors</h1>
+    </Containers>
   )
 }
 

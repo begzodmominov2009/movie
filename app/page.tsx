@@ -11,27 +11,18 @@ import { Movie } from "@/types/MoviesDataTypes";
 import { getMovies } from "@/service/useGetMovie";
 import { GenerType } from "@/types/GenerTypes";
 import { getGener } from "@/service/useGetGanre";
-<<<<<<< HEAD
 import { MovieAktor } from "@/types/MoviesActor";
 import { getAktor } from "@/service/useGetMovieActors";
 import SectionHeader from "./components/ui/SectionHead";
-=======
-import SectionHeader from "./components/ui/SectionHead";
-import { MovieAktor } from "@/types/MoviesActor";
-import { getAktor } from "@/service/useGetMovieActors";
 import HomeActiors from "./components/shared/home/HomeActiors";
->>>>>>> b511de7d201fced079a3b258f8b47ba86c6c01af
 
 const page = async () => {
   const movies: Movie[] = await getMovies();
   const ganer: GenerType[] = await getGener();
   const aktors: MovieAktor[] = await getAktor();
 
-<<<<<<< HEAD
   console.log(ganer);
 
-=======
->>>>>>> b511de7d201fced079a3b258f8b47ba86c6c01af
   return (
     <>
       <HomeBanner movies={movies} />
