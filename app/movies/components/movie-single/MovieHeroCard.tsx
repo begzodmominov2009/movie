@@ -13,6 +13,7 @@ import Duration from "@/app/components/ui/Duration";
 import { MovieAktor } from "@/types/MoviesActor";
 import Link from "next/link";
 import ScrollToPlayerButton from "./ScrollToPlayerButton";
+import BackButton from "@/app/components/ui/BackButton";
 
 type Props = {
   movie: Movie;
@@ -46,9 +47,11 @@ export default function MovieHeroCard({
         {/* ✅ 0-519: column | 520+: row (520 dagi zo'r holat saqlanadi) */}
         <div className="flex flex-col min-[520px]:flex-row gap-5">
           {/* POSTER */}
-          <div className="shrink-0 w-[110px] min-[520px]:w-[140px] md:w-[170px]">
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/30">
-              <div className="aspect-[2/3]">
+          <div
+            className="shrink-0 w-full min-[520px]:w-[140px] md:w-[170px]" 
+          >
+            <div className="overflow-hidden flex items-center justify-center min-[520px]:flex-none rounded-2xl border border-white/10 min-[520px]:bg-black/30">
+              <div className="h-[260px] object-contain w-full min-[520px]:h-auto">
                 {movie.poster_url ? (
                   <img
                     src={movie.poster_url}
@@ -66,7 +69,8 @@ export default function MovieHeroCard({
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <div className="text-white/60 text-xs md:text-sm mb-1">
+                <div className="text-white/60 flex items-center gap-2 text-xs md:text-sm mb-1">
+                  <BackButton />
                   Uzbek tilida • HD • Online tomosha
                 </div>
 

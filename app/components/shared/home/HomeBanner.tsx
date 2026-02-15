@@ -7,9 +7,9 @@ import HomeBannerCard from "./components/HomeBanner/HomeBannerCard";
 import HomeBannerCardSkeleton from "./components/HomeBanner/HomeBannerScletonCard";
 
 type Props = {
-  movies?: Movie[]; // ✅ endi optional
+  movies?: Movie[]; 
   visible?: number;
-  loading?: boolean; // ✅ xohlasang tashqaridan ham berasan
+  loading?: boolean; 
 };
 
 export default function HomeBanner({
@@ -30,8 +30,8 @@ export default function HomeBanner({
       <SwiperSection<Movie>
         variant="hero"
         gap={14}
-        autoplay={!isLoading} // ✅ loading paytida autoplay o‘chadi
-        loop={!isLoading} // ✅ loading paytida loop o‘chadi
+        autoplay={!isLoading}
+        loop={!isLoading} 
         visible={visible}
         heroBreakpoints={{
           0: { slidesPerView: 1.1 },

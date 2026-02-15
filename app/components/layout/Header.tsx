@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import {
   Search,
@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import Button from "../ui/Button";
 import Containers from "../ui/Containers";
+import ActiveLink from "../ui/ActiveLink";
 
 export default function Header() {
   const [isDark, setIsDark] = useState(true);
@@ -48,9 +49,7 @@ export default function Header() {
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                   <Search size={16} />
                 </div>
-                <Button
-                  className="absolute right-1 top-1/2 -translate-y-1/2 shadow-sm px-3 py-1.5"
-                >
+                <Button className="absolute right-1 top-1/2 -translate-y-1/2 shadow-sm px-3 py-1.5">
                   Qidirish
                 </Button>
               </form>
@@ -59,50 +58,25 @@ export default function Header() {
 
           {/* RIGHT: nav + actions */}
           <nav className="hidden md:flex items-center gap-3">
-            <Link
-              href="/"
-              className="flex items-center gap-2 rounded-full px-3 py-2 hover:bg-white/5 text-gray-200"
-            >
-              <Home size={16} /> <span className="text-sm">Bosh sahifa</span>
-            </Link>
+            <ActiveLink href="/" exact>
+              <Home size={16} />
+              <span className="text-sm">Bosh sahifa</span>
+            </ActiveLink>
 
-            <Link
-              href="/movies"
-              className="flex items-center gap-2 rounded-full px-3 py-2 hover:bg-white/5 text-gray-200"
-            >
-              <Film size={16} /> <span className="text-sm">Kino</span>
-            </Link>
+            <ActiveLink href="/movies">
+              <Film size={16} />
+              <span className="text-sm">Kino</span>
+            </ActiveLink>
 
-            <Link
-              href="/serials"
-              className="flex items-center gap-2 rounded-full px-3 py-2 hover:bg-white/5 text-gray-200"
-            >
-              <Tv size={16} /> <span className="text-sm">Serial</span>
-            </Link>
+            <ActiveLink href="/serials">
+              <Tv size={16} />
+              <span className="text-sm">Serial</span>
+            </ActiveLink>
 
-            <Link
-              href="/cartoons"
-              className="flex items-center gap-2 rounded-full px-3 py-2 hover:bg-white/5 text-gray-200"
-            >
-              <Film size={16} /> <span className="text-sm">Multfilm</span>
-            </Link>
-
-            {/* theme toggle */}
-            <button
-              onClick={() => setIsDark((s) => !s)}
-              className="ml-2 rounded-full cursor-pointer p-2 hover:bg-white/5 text-gray-200"
-              title="Toggle theme"
-            >
-              {isDark ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
-
-            {/* profile */}
-            <Link
-              href="/profile"
-              className="ml-2 rounded-full p-1 hover:bg-white/5 text-gray-200"
-            >
-              <UserCircle size={28} />
-            </Link>
+            <ActiveLink href="/cartoons">
+              <Film size={16} />
+              <span className="text-sm">Multfilm</span>
+            </ActiveLink>
           </nav>
 
           {/* MOBILE: menu button */}
@@ -130,16 +104,28 @@ export default function Header() {
       {openMobile && (
         <div className="md:hidden border-t border-white/5 bg-[#0B0B0D]">
           <div className="mx-auto max-w-[1280px] px-4 py-3 flex flex-col gap-2">
-            <Link href="/" className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-white/5 text-gray-200">
+            <Link
+              href="/"
+              className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-white/5 text-gray-200"
+            >
               <Home size={16} /> Bosh sahifa
             </Link>
-            <Link href="/kino" className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-white/5 text-gray-200">
+            <Link
+              href="/kino"
+              className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-white/5 text-gray-200"
+            >
               <Film size={16} /> Kino
             </Link>
-            <Link href="/serial" className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-white/5 text-gray-200">
+            <Link
+              href="/serial"
+              className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-white/5 text-gray-200"
+            >
               <Tv size={16} /> Serial
             </Link>
-            <Link href="/multfilm" className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-white/5 text-gray-200">
+            <Link
+              href="/multfilm"
+              className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-white/5 text-gray-200"
+            >
               <Film size={16} /> Multfilm
             </Link>
           </div>
