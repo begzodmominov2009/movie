@@ -2,10 +2,7 @@
 
 import React, { useState } from "react";
 import { Movie } from "@/types/MoviesDataTypes";
-import Containers from "./Containers";
-
-// Agar keyin ishlatsang: HomeMoviesNewBadge, HomeMoviesRatingBadge
-// hozircha kerakmas bo‘lsa importlarini o‘chirib qo‘y
+import Link from "next/link";
 
 const PlayIcon = () => (
   <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
@@ -130,18 +127,23 @@ function MovieCard({ item }: MovieCardProps) {
           {item.title_en}
         </h3>
 
-        <p className="mt-1 text-[13px] text-white/55">{item.release_year}</p>
+        <p className="mt-1 text-[13px] text-white/55">{item.created_at}</p>
       </div>
     </div>
   );
 }
 
-export default function MoviesCard({ movies, className = "" }: MoviesCardProps) {
+export default function MoviesCard({
+  movies,
+  className = "",
+}: MoviesCardProps) {
   return (
-      <div className={className}>
-        {movies?.map((item) => (
+    <div className={className}>
+      {movies?.map((item) => (
+        <Link key={item.id} href={`/movies/${item.id}`}>
           <MovieCard key={item.id ?? item.title_en} item={item} />
-        ))}
-      </div>
+        </Link>
+      ))}
+    </div>
   );
 }
