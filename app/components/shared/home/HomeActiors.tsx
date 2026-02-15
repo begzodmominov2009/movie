@@ -1,56 +1,40 @@
 "use client";
 
-import Containers from "../../ui/Containers";
 import { MovieAktor } from "@/types/MoviesActor";
-import { FaStar } from "react-icons/fa";
-import { FiArrowRightCircle } from "react-icons/fi";
+import SwiperSection from "../SwiperSection/SwiperSection";
+import MovieActors from "../../ui/ActiorsCard";
+import Containers from "../../ui/Containers";
 
 type Props = {
   aktors: MovieAktor[];
-  className?: string;
+  visible?: number;
 };
 
-function MovieCard({ item }: { item: MovieAktor }) {
+const HomeActiors = ({ aktors, visible = 1 }: Props) => {
   return (
-    <div className="bg-transparent border border-white/20 rounded-2xl group hover:border-white/50 hover:bg-white/2 p-3 transition cursor-pointer max-w-[180px] w-full">
-      <div className="w-full h-[190px] rounded-xl overflow-hidden mb-3">
-        <img
-          src={item.photo_url}
-          alt={item.full_name}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-      </div>
-
-      <h3 className="text-sm font-semibold text-white truncate">
-        {item.full_name}
-      </h3>
-
-      <p className="text-xs text-gray-400">Actor</p>
-    </div>
+    <Containers>
+      <SwiperSection<MovieAktor>
+        variant="hero"
+        gap={4}
+        loop
+        visible={visible}
+        heroBreakpoints={{
+          0: { slidesPerView: 1 },
+          480: { slidesPerView: 1 },
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 1 },
+          1024: { slidesPerView: visible },
+        }}
+        items={aktors}
+        getKey={(m) => m.id ?? m.full_name}
+        renderItem={(m) => (
+          <div className="py-1">
+            <MovieActors aktors={aktors} className="flex gap-5" />
+          </div>
+        )}
+      />
+    </Containers>
   );
-}
+};
 
-export default function HomeActiors({ aktors, className = "" }: Props) {
-  return (
-    <div className={className}>
-      <Containers className="flex justify-between mt-5 mb-2">
-        <div className="flex items-center gap-[5px]">
-          <FaStar style={{color:"white"}} />
-
-          <h1 className="text-white font-bold text-[20px]">
-            Aktyorlar
-          </h1>
-        </div>
-        <button className="flex items-center gap-2 text-white bg-white/10 rounded-[10px] px-[10px] py-2 cursor-pointer">
-          <FiArrowRightCircle className="text-white" />
-          barchasi
-        </button>
-      </Containers>
-      <Containers className="grid grid-cols-4 gap-5">
-        {aktors.map((item) => (
-          <MovieCard key={item.id ?? item.full_name} item={item} />
-        ))}
-      </Containers>
-    </div>
-  );
-}
+export default HomeActiors;

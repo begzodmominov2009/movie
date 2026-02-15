@@ -15,7 +15,7 @@ const HomeMovies = ({ movies, visible = 1 }: Props) => {
     <Containers>
       <SwiperSection<Movie>
         variant="hero"
-        gap={480}
+        gap={1980}
         loop
         visible={visible}
         heroBreakpoints={{

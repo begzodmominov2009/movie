@@ -1,10 +1,16 @@
 import React from 'react'
 import Containers from '../../ui/Containers'
+import HomeTopMoviesBanner from './components/HomeTop/HomeTopMoviesBanner'
+import { Movie } from '@/types/MoviesDataTypes'
 
-const HomeTopMovies = () => {
+type Props = {
+  movies: Movie[];
+};
+
+const HomeTopMovies = ({movies}:Props) => {
   return (
     <Containers>
-      HomeTopMovies
+      <HomeTopMoviesBanner movies={movies}/>
     </Containers>
   )
 }

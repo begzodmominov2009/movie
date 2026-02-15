@@ -86,7 +86,7 @@ export default function HomeCountry() {
               rounded-xl px-4 py-3 transition"
           >
             <div className="flex items-center gap-3">
-              <span className="text-2xl">{item.flag}</span>
+              <span className="text-2xl text-[white] font-bold">{item.flag}</span>
               <span className="text-sm text-white">{item.title}</span>
             </div>
 
