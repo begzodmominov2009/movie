@@ -12,21 +12,24 @@ import { Movie } from "@/types/MoviesDataTypes";
 import { getMovies } from "@/service/useGetMovie";
 import { GenerType } from "@/types/GenerTypes";
 import { getGener } from "@/service/useGetGanre";
+import { MovieAktor } from "@/types/MoviesActor";
+import { getAktor } from "@/service/useGetMovieActors";
 
 const page = async () => {
   const movies: Movie[] = await getMovies();
   const ganer: GenerType[] = await getGener();
-  
+  const aktors: MovieAktor[] = await getAktor();
+
 
   return (
     <>
       <HomeBanner movies={movies} />
       <HomeGaner ganer={ganer}/>
-      <HomeMovies />
+      <HomeMovies movies={movies}/>
       <HomeSerials />
       <HomeExtiraMovies />
       <HomeTopMovies />
-      <HomeActiors />
+      <HomeActiors aktors={aktors}  />
       <Containers>description</Containers>
       <HomeCountry />
     </>

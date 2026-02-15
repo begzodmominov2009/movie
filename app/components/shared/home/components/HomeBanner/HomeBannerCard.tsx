@@ -18,7 +18,7 @@ const HomeBannerCard = ({ item }: Props) => {
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/70" />
 
-      <HomeBannerRatingButton>{item.age_rating}</HomeBannerRatingButton>
+      <HomeBannerRatingButton>{item.imdb_rating}</HomeBannerRatingButton>
 
       <div className="absolute bottom-0 left-0 p-6">
         <h2 className="text-[30px] font-bold text-white drop-shadow">

@@ -219,7 +219,7 @@ const GENRES: Genre[] = [
 ];
 
 type Props = {
-  ganer: GenerType
+  ganer: GenerType[]
 }
 
 export default function HomeGaner({ganer}: Props) {
