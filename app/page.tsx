@@ -18,7 +18,6 @@ import HomeActiors from "./components/shared/home/HomeActiors";
 
 const page = async () => {
   const movies: Movie[] = await getMovies();
-  console.log(movies);
   
   const ganer: GenerType[] = await getGener();
   const aktors: MovieAktor[] = await getAktor();
@@ -39,7 +38,7 @@ const page = async () => {
       <HomeSerials />
       <HomeExtiraMovies />
       <HomeTopMovies movies={movies} />
-      <div>
+      <div className="mt-5">
         <SectionHeader
           title="Aktyorlar"
           iconUrl="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22white%22%3E%3Cpath%20d%3D%22M12%202.5l2.94%206.04%206.66.97-4.8%204.68%201.13%206.63L12%2017.98%206.07%2020.82l1.13-6.63-4.8-4.68%206.66-.97L12%202.5z%22/%3E%3C/svg%3E"

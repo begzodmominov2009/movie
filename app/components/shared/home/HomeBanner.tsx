@@ -17,7 +17,6 @@ export default function HomeBanner({
   visible = 2,
   loading,
 }: Props) {
-  // ✅ movies yo‘q / bo‘sh bo‘lsa skeleton chiqsin
   const isLoading = loading ?? movies.length === 0;
 
   const skeletonItems = Array.from({ length: Math.max(visible, 2) }).map(
