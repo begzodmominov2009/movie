@@ -67,7 +67,7 @@ const countries: CountryItem[] = [
     id: 8,
     title: "O'zbek tilida yangi kinolar  2025",
     count: "HD  ",
-    flag: "🇰🇷",
+    flag: "uz",
     href: "/movie/country/korea",
   },
 ];

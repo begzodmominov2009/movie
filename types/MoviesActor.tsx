@@ -6,4 +6,4 @@ export interface MovieAktor{
     "birth_year": number,
     "biography": string,
     "country": string
-}
+} 

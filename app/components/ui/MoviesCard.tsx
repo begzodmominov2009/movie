@@ -2,10 +2,7 @@
 
 import React, { useState } from "react";
 import { Movie } from "@/types/MoviesDataTypes";
-import Containers from "./Containers";
-
-// Agar keyin ishlatsang: HomeMoviesNewBadge, HomeMoviesRatingBadge
-// hozircha kerakmas bo‘lsa importlarini o‘chirib qo‘y
+import Link from "next/link";
 
 const PlayIcon = () => (
   <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
@@ -54,7 +51,7 @@ function MovieCard({ item }: MovieCardProps) {
   return (
     <div
       className={[
-        "w-[220px] sm:w-[240px] md:w-[260px] lg:w-[280px]", // ✅ moslashuvchan width
+        "w-[220px] sm:w-[240px] md:w-[260px] lg:w-[210px]", // ✅ moslashuvchan width
         "shrink-0",
       ].join(" ")}
       onMouseEnter={() => setHover(true)}
@@ -86,18 +83,18 @@ function MovieCard({ item }: MovieCardProps) {
         </div>
 
         {/* NEW badge */}
-        <span className="absolute  left-4 top-4 rounded-lg bg-red-500 px-2.5 py-1 text-[11px] font-semibold text-white shadow">
+        <span className="absolute  left-2 top-2 rounded-lg bg-red-500 px-2 py-[2px] text-[11px] font-semibold text-white shadow">
           NEW
         </span>
 
         {/* rating badge */}
-        <span className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-[12px] font-semibold text-white ring-1 ring-white/10 backdrop-blur">
+        <span className="absolute right-2 top-2 inline-flex items-center gap-[1px] rounded-full bg-black/55 px-2 py-[2px] text-[12px] font-semibold text-white ring-1 ring-white/10 backdrop-blur">
           <StarIcon />
           {item.imdb_rating}
         </span>
 
         {/* duration badge */}
-        <span className="absolute bottom-4 right-4 inline-flex items-center gap-1 rounded-full bg-black/55 px-3 py-1 text-[12px] font-medium text-white ring-1 ring-white/10 backdrop-blur">
+        <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-black/55 px-2 py-1 text-[12px] font-medium text-white ring-1 ring-white/10 backdrop-blur">
           <ClockIcon />
           {item.duration_minutes} min
         </span>
@@ -105,7 +102,7 @@ function MovieCard({ item }: MovieCardProps) {
         {/* hover overlay + play */}
         <div
           className={[
-            "absolute inset-0 grid place-items-center",
+            "absolute inset-0 grid place-items-center cursor-pointer",
             "transition-opacity duration-300",
             hover ? "opacity-100" : "opacity-0",
           ].join(" ")}
@@ -114,7 +111,7 @@ function MovieCard({ item }: MovieCardProps) {
 
           <button
             type="button"
-            className="relative grid h-[72px] w-[72px] place-items-center rounded-full bg-white/85 ring-4 ring-white/20"
+            className="relative grid h-[52px] w-[52px] cursor-pointer place-items-center rounded-full bg-white/85 ring-4 ring-white/20"
             aria-label="Play"
           >
             <span className="text-green-500">
@@ -136,14 +133,17 @@ function MovieCard({ item }: MovieCardProps) {
   );
 }
 
-export default function MoviesCard({ movies, className = "" }: MoviesCardProps) {
+export default function MoviesCard({
+  movies,
+  className = "",
+}: MoviesCardProps) {
   return (
     <div className={className}>
-      <Containers className="grid grid-cols-4">
-        {movies?.map((item) => (
+      {movies?.map((item) => (
+        <Link key={item.id} href={`/movies/${item.id}`}>
           <MovieCard key={item.id ?? item.title_en} item={item} />
-        ))}
-      </Containers>
+        </Link>
+      ))}
     </div>
   );
 }

@@ -16,12 +16,16 @@ const HomeBannerCard = ({ item }: Props) => {
         className="absolute inset-0 h-full w-full object-cover"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/70" />
+      {/* ✅ ONLY BOTTOM OVERLAY (tepaga chiqqani sari yo‘qoladi) */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+
+      {/* (Optional) Pastda text uchun yana biroz “soft” qoraytirish */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-[55%] bg-gradient-to-t from-black/55 to-transparent" />
 
       <HomeBannerRatingButton>{item.imdb_rating}</HomeBannerRatingButton>
 
       <div className="absolute bottom-0 left-0 p-6">
-        <h2 className="text-[30px] font-bold text-white drop-shadow">
+        <h2 className="text-[30px] font-bold text-white drop-shadow-lg">
           {item.title_en}
         </h2>
 
