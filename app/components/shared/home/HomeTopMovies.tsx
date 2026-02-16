@@ -1,7 +1,7 @@
 import React from 'react'
 import Containers from '../../ui/Containers'
-import HomeTopMoviesBanner from './components/HomeTop/HomeTopMoviesBanner'
 import { Movie } from '@/types/MoviesDataTypes'
+import HomeTopMoviesBanner from './components/HomeTop/HomeTopMoviesBanner';
 
 type Props = {
   movies: Movie[];

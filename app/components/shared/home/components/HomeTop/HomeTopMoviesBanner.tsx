@@ -1,4 +1,6 @@
 import Containers from "@/app/components/ui/Containers";
+import { getCategory } from "@/service/useGetCategories";
+import { GenerType } from "@/types/GenerTypes";
 import { Movie } from "@/types/MoviesDataTypes";
 import Link from "next/link";
 import { BsFire } from "react-icons/bs";
@@ -8,7 +10,11 @@ type Props = {
     visible?: number;
 };
 
-const HomeTopMoviesBanner = ({ movies }: Props) => {
+const HomeTopMoviesBanner = async ({ movies }: Props) => {
+    const categories = await getCategory();
+    const twoMainCategories = categories?.slice(0,2)
+    console.log(twoMainCategories);
+    
     return (
         <Containers className="flex flex-col md:flex-row gap-4 w-full px-4 py-2">
             {/* LEFT LIST */}
@@ -60,11 +66,11 @@ const HomeTopMoviesBanner = ({ movies }: Props) => {
             <div className="flex-1 border border-[#313433] p-4 rounded-xl bg-[#1D1F1E]">
                 <h2 className="text-white text-2xl font-semibold mb-5 flex items-center gap-3">
                     <p className="text-[#D08700]"><BsFire /></p>
-                    <p>TOP 5 Seriallar</p>
+                    <p>TOP 5 Multfilmlar</p>
                 </h2>
 
                 <div className="space-y-3">
-                    {movies.slice(0, 5).map((movie, idx) => (
+                    {movies.slice(7, 12).map((movie, idx) => (
                         <Link
                             href={`/movies/${movie.id}`}
                             key={movie.id}
@@ -101,8 +107,6 @@ const HomeTopMoviesBanner = ({ movies }: Props) => {
                 </div>
             </div>
         </Containers>
-
-
     );
 }
 
