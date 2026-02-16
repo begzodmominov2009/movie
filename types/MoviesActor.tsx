@@ -1,5 +1,5 @@
 export interface MovieAktor{
-    id: number,
+    id: string,
     created_at: string,
     full_name: string,
     photo_url: string,

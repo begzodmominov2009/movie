@@ -33,7 +33,7 @@ const HomeMovies = ({ movies, visible = 1 }: Props) => {
           </div>
         )}
       />
-    </Containers>
+    </Containers >
   );
 };
 

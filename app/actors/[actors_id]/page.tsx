@@ -1,10 +1,14 @@
-import React from 'react'
+import Containers from "@/app/components/ui/Containers"
 
 const page = () => {
   return (
-    <div>
-      page
-    </div>
+    <>
+       <Containers>
+        <h1 className="text-red-600">
+          Aktor singil
+        </h1>
+        </Containers>
+    </>
   )
 }
 

@@ -5,7 +5,6 @@ import HomeMovies from "./components/shared/home/HomeMovies";
 import HomeSerials from "./components/shared/home/HomeSerials";
 import HomeExtiraMovies from "./components/shared/home/HomeExtiraMovies";
 import HomeTopMovies from "./components/shared/home/HomeTopMovies";
-import HomeCountry from "./components/shared/home/HomeCountry";
 import Containers from "./components/ui/Containers";
 import { Movie } from "@/types/MoviesDataTypes";
 import { getMovies } from "@/service/useGetMovie";
@@ -15,13 +14,12 @@ import { MovieAktor } from "@/types/MoviesActor";
 import { getAktor } from "@/service/useGetMovieActors";
 import SectionHeader from "./components/ui/SectionHead";
 import HomeActiors from "./components/shared/home/HomeActiors";
+import HomeCountry from "./components/shared/home/HomeCountry";
 
 const page = async () => {
   const movies: Movie[] = await getMovies();
   const ganer: GenerType[] = await getGener();
   const aktors: MovieAktor[] = await getAktor();
-
-  console.log(ganer);
 
   return (
     <>
@@ -49,7 +47,7 @@ const page = async () => {
         <HomeActiors aktors={aktors} />
       </div>
       <Containers>description</Containers>
-      <HomeCountry />
+      <HomeCountry  />
     </>
   );
 };

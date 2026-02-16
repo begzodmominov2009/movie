@@ -1,15 +1,15 @@
 "use client";
 
-import Containers from "./Containers";
 import { MovieAktor } from "@/types/MoviesActor";
-
-type MovieActorCardProps = {
-  item: MovieAktor;
-  className?: string;
-};
+import Link from "next/link";
 
 type MovieActorsGridProps = {
   aktors: MovieAktor[];
+  className?: string;
+};
+
+type MovieActorCardProps = {
+  item: MovieAktor;
   className?: string;
 };
 
@@ -46,10 +46,14 @@ export default function MovieActors({
   className = "",
 }: MovieActorsGridProps) {
   return (
-    <div className={className}>
-        {aktors?.map((item) => (
-          <MovieActorCard key={item.id ?? item.full_name} item={item} />
-        ))}
+    <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 ${className}`}>
+      {aktors?.map((item) => {
+        return (
+          <Link key={item.id} href={`/actors/${item.id}`}>
+            <MovieActorCard item={item} />
+          </Link>
+        );
+      })}
     </div>
   );
 }

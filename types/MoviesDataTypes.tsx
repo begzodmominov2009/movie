@@ -1,5 +1,5 @@
 export interface Movie {
-  id?: string | number;
+  id?: string ;
 
   title_uz?: string;
   title_ru?: string;
