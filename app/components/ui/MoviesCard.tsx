@@ -1,14 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Movie } from "@/types/MoviesDataTypes";
 import Link from "next/link";
-
-const PlayIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-    <path d="M9 7l10 5-10 5V7Z" fill="currentColor" />
-  </svg>
-);
+import type { Movie } from "@/types/MoviesDataTypes";
+import { IoPlayCircleOutline } from "react-icons/io5";
+import { MovieGenre } from "@/types/MovieGanre";
 
 const StarIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -36,114 +32,84 @@ const ClockIcon = () => (
   </svg>
 );
 
-type MoviesCardProps = {
-  movies: Movie[];
-  className?: string;
-};
-
-type MovieCardProps = {
+type Props = {
   item: Movie;
+  movie_filtered?: Movie[]
+  ganer_name_cartoons?: string;
+  ganer_name_movie?: string;
 };
 
-function MovieCard({ item }: MovieCardProps) {
+export default function MovieCard({
+  item,
+  ganer_name_cartoons,
+  ganer_name_movie,
+}: Props) {
   const [hover, setHover] = useState(false);
 
   return (
-    <div
-      className={[
-        "w-[220px] sm:w-[240px] md:w-[260px] lg:w-[210px]", // ✅ moslashuvchan width
-        "shrink-0",
-      ].join(" ")}
+    <Link
+      href={`/movies/${item?.id}`}
+      prefetch
+      className="block w-full"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {/* poster box */}
       <div
         className={[
           "relative overflow-hidden rounded-3xl",
-          "border border-white/10 bg-white/[0.04]",
-          "ring-1 ring-white/10",
+          "border border-white/10 bg-white/[0.04]  ring-1 ring-white/10",
           "shadow-[0_18px_60px_rgba(0,0,0,0.55)]",
-          "transition-all duration-200",
+          "transition-all duration-200 w-[200px]",
           "hover:border-white/15 hover:ring-white/15 hover:bg-white/[0.06]",
         ].join(" ")}
       >
-        {/* poster */}
         <div className="aspect-[4/5]">
           <img
-            src={item.poster_url}
-            alt={item.title_en}
+            src={item?.poster_url}
+            alt={item?.title_uz || item?.title_uz || "Movie"}
             loading="lazy"
             className={[
-              "h-full w-full object-cover",
-              "transition duration-300",
+              "h-full w-full object-cover transition duration-300",
               hover ? "blur-[5px] scale-[1.06]" : "scale-100",
             ].join(" ")}
           />
         </div>
 
-        {/* NEW badge */}
-        <span className="absolute  left-2 top-2 rounded-lg bg-red-500 px-2 py-[2px] text-[11px] font-semibold text-white shadow">
-          NEW
-        </span>
-
-        {/* rating badge */}
         <span className="absolute right-2 top-2 inline-flex items-center gap-[1px] rounded-full bg-black/55 px-2 py-[2px] text-[12px] font-semibold text-white ring-1 ring-white/10 backdrop-blur">
           <StarIcon />
-          {item.imdb_rating}
+          {item?.imdb_rating ?? "—"}
         </span>
 
-        {/* duration badge */}
         <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-black/55 px-2 py-1 text-[12px] font-medium text-white ring-1 ring-white/10 backdrop-blur">
           <ClockIcon />
-          {item.duration_minutes} min
+          {item?.duration_minutes ?? "—"} min
         </span>
 
-        {/* hover overlay + play */}
         <div
           className={[
-            "absolute inset-0 grid place-items-center cursor-pointer",
+            "absolute inset-0 grid place-items-center",
             "transition-opacity duration-300",
             hover ? "opacity-100" : "opacity-0",
           ].join(" ")}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
-
-          <button
-            type="button"
-            className="relative grid h-[52px] w-[52px] cursor-pointer place-items-center rounded-full bg-white/85 ring-4 ring-white/20"
-            aria-label="Play"
-          >
+          <div className="relative grid h-[52px] w-[52px] place-items-center rounded-full bg-white/85 ring-4 ring-white/20">
             <span className="text-green-500">
-              <PlayIcon />
+              <IoPlayCircleOutline className="w-7 h-7" />
             </span>
-          </button>
+          </div>
         </div>
       </div>
 
-      {/* title + meta */}
       <div className="mt-4">
         <h3 className="line-clamp-1 text-[16px] sm:text-[17px] md:text-[18px] font-semibold text-white leading-tight">
-          {item.title_en}
+          {item?.title_uz || item?.title_uz || item?.title_ru || "—"}
         </h3>
-
-        <p className="mt-1 text-[13px] text-white/55">{item.created_at}</p>
+        <p className="mt-1 text-[13px] text-white/55">
+          {item?.created_by} • {ganer_name_cartoons}{" "}
+          {ganer_name_movie}
+        </p>
       </div>
-    </div>
-  );
-}
-
-export default function MoviesCard({
-  movies,
-  className = "",
-}: MoviesCardProps) {
-  return (
-    <div className={className}>
-      {movies?.map((item) => (
-        <Link key={item.id} href={`/movies/${item.id}`}>
-          <MovieCard key={item.id ?? item.title_en} item={item} />
-        </Link>
-      ))}
-    </div>
+    </Link>
   );
 }
