@@ -18,12 +18,14 @@ function MovieActorCard({ item, className = "" }: MovieActorCardProps) {
     <div
       className={[
         "bg-transparent border border-white/20 rounded-2xl",
-        "group hover:border-white/50 hover:bg-white/2",
-        "p-3 transition cursor-pointer max-w-[180px] w-full",
+        "group hover:border-white/50 hover:bg-white/5",
+        "p-3 transition cursor-pointer",
+        variant === "list" ? "w-[200px] shrink-0" : "w-full",
         className,
       ].join(" ")}
     >
       <div className="w-full h-[190px] rounded-xl overflow-hidden mb-3">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item.photo_url}
           alt={item.full_name}
@@ -40,6 +42,11 @@ function MovieActorCard({ item, className = "" }: MovieActorCardProps) {
     </div>
   );
 }
+
+type MovieActorsGridProps = {
+  aktors: MovieAktor[];
+  className?: string;
+};
 
 export default function MovieActors({
   aktors,

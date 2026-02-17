@@ -17,23 +17,30 @@ const Country = async ({ params }: { params: Props }) => {
 
   console.log(countryId);
 
+  console.log(countryId);
+  
 
 
 
-  const moviesFiltred = movies?.filter((el) => countryId === el.country)
 
-
+  const moviesFiltred = movies?.filter((el) => (
+    el.country
+  ))
 
   console.log(moviesFiltred);
+
+
+
+
 
 
 
   return (
     <>
       <Containers>
-        <h1>
-
-        </h1>
+       {
+        
+       }
       </Containers>
     </>
   )

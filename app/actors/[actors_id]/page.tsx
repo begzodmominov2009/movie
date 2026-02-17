@@ -1,6 +1,14 @@
 import Containers from "@/app/components/ui/Containers"
+type PageProps = {
+  params: Promise<{ aktor_id: string }>;
+};
+const page = async({params} : PageProps) => {
+  const { aktor_id: movieId } = await params;
+  console.log(movieId);
+  
+  
 
-const page = () => {
+
   return (
     <>
        <Containers>

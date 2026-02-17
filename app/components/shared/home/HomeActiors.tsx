@@ -2,6 +2,7 @@
 
 import Containers from "../../ui/Containers";
 import { MovieAktor } from "@/types/MoviesActor";
+import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import { FiArrowRightCircle } from "react-icons/fi";
 
@@ -12,7 +13,7 @@ type Props = {
 
 function MovieCard({ item }: { item: MovieAktor }) {
   return (
-    <div className="bg-transparent border border-white/20 rounded-2xl group hover:border-white/50 hover:bg-white/2 p-3 transition cursor-pointer max-w-[180px] w-full">
+    <Link href={`/actors/${item.id}`} className="bg-transparent border border-white/20 rounded-2xl group hover:border-white/50 hover:bg-white/2 p-3 transition cursor-pointer max-w-[180px] w-full">
       <div className="w-full h-[190px] rounded-xl overflow-hidden mb-3">
         <img
           src={item.photo_url}
@@ -26,7 +27,7 @@ function MovieCard({ item }: { item: MovieAktor }) {
       </h3>
 
       <p className="text-xs text-gray-400">Actor</p>
-    </div>
+    </Link>
   );
 }
 

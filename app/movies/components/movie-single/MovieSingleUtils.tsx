@@ -7,7 +7,7 @@ export function minutesToText(min?: number) {
   if (!min) return "—";
   const h = Math.floor(min / 60);
   const m = min % 60;
-  return h ? `${h} s. ${m} min` : `${m} min`;
+  return h ? `${h} soat ${m} min` : `${m} min`;
 }
 
 export const DEMO_GENRES = ["Triller", "Tarjima kinolar", "Mistik"];
@@ -30,14 +30,5 @@ export const DEMO_RECOMMENDED = [
     tag: "Drama",
     poster:
       "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&q=80",
-  },
-  {
-    id: "3",
-    title: "Yashil Ritsar",
-    year: 2021,
-    minutes: 130,
-    tag: "Drama",
-    poster:
-      "https://images.unsplash.com/photo-1517602302552-471fe67acf66?w=500&q=80",
   },
 ];
