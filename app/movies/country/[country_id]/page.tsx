@@ -1,48 +1,47 @@
-import Containers from '@/app/components/ui/Containers'
-import { getMovies } from '@/service/useGetMovie'
-import { CountryItem } from '@/types/Countrs'
+import Containers from "@/app/components/ui/Containers"
+import MovieCard from "@/app/components/ui/MoviesCard"
+import { getMovies } from "@/service/useGetMovie"
 
-
-type Props = {
-  params: CountryItem
+type PageProps = {
+  params: Promise<{
+    country_id: string
+  }>
 }
 
+// 🔹 barcha variantlarni bitta nomga keltiramiz
+const normalizeCountry = (value: string) => {
+  const v = value.trim().toUpperCase()
 
-const Country = async ({ params }: { params: Props }) => {
+  if (["USA", "US", "USE", "AQSH"].includes(v)) return "USA"
+  if (["FRANCE", "FR"].includes(v)) return "FRANCE"
+  if (["BELGIUM", "BE"].includes(v)) return "BELGIUM"
+
+  return v
+}
+
+const Country = async ({ params }: PageProps) => {
+  const { country_id } = await params
   const movies = await getMovies()
-  console.log(movies);
 
+  const selectedCountry = normalizeCountry(country_id)
 
-  const countryId = params;
+  const moviesFiltered = movies.filter((movie) => {
+    // "USA, France" → ["USA", "France"]
+    const countries = movie.country
+      .split(",")
+      .map(c => normalizeCountry(c))
 
-  console.log(countryId);
-
-  console.log(countryId);
-  
-
-
-
-
-  const moviesFiltred = movies?.filter((el) => (
-    el.country
-  ))
-
-  console.log(moviesFiltred);
-
-
-
-
-
-
+    return countries.includes(selectedCountry)
+  })
 
   return (
-    <>
-      <Containers>
-       {
-        
-       }
-      </Containers>
-    </>
+    <Containers>
+      {moviesFiltered.map(movie => (
+        <div key={movie.id} className="text-white">
+          <MovieCard/>
+        </div>
+      ))}
+    </Containers>
   )
 }
 
