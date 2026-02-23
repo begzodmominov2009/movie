@@ -25,7 +25,7 @@ const HomeTopMoviesBanner = async ({ movies }: Props) => {
                     </h2>
 
                     <div className="space-y-3">
-                        {movies.slice(0, 5).map((movie, id) => (
+                        {movies.slice(6, 11).map((movie, id) => (
                             <Link
                                 href={`/movies/${movie.id}`}
                                 key={movie.id}
@@ -70,7 +70,7 @@ const HomeTopMoviesBanner = async ({ movies }: Props) => {
                 </h2>
 
                 <div className="space-y-3">
-                    {movies.slice(5, 10).map((movie, idx) => (
+                    {movies.slice(22, 28).map((movie, idx) => (
                         <Link
                             href={`/movies/${movie.id}`}
                             key={movie.id}
