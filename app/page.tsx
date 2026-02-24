@@ -24,25 +24,24 @@ const page = async () => {
   const aktors: MovieAktor[] = await getAktor();
 
   // ganer_cartoons_card_filter
-  const ganer_cartoons = ganer?.[0].id;
-  const ganer_name_cartoons = ganer?.[0].name_uz;
+  const ganer_cartoons = ganer?.[7].id;
+  const ganer_name_cartoons = ganer?.[7].name_uz;
   const movie_genre_filtered =
     movie_genre
-      ?.filter((item) => item.genre_id === ganer_cartoons)
-      ?.map((item) => String(item.movie_id)) ?? [];
+      ?.filter((item) => item?.genre_id === ganer_cartoons)
+      ?.map((item) => String(item?.movie_id)) ?? [];
   const movie_filtered =
     movies?.filter((el) => movie_genre_filtered.includes(String(el.id))) ?? [];
 
   // ganer_movie_card_filter
-  const ganer_movie = ganer?.[7].id;
-  const ganer_name_movie = ganer?.[7].name_uz;
+  const ganer_movie = ganer?.[0].id;
+  const ganer_name_movie = ganer?.[0].name_uz;
   const genre_movie_filtered =
     movie_genre
-      ?.filter((item) => item.genre_id === ganer_movie)
-      ?.map((item) => String(item.movie_id)) ?? [];
+      ?.filter((item) => item?.genre_id === ganer_movie)
+      ?.map((item) => String(item?.movie_id)) ?? [];
   const movie_movie_filtered =
     movies?.filter((el) => genre_movie_filtered.includes(String(el.id))) ?? [];
-
   return (
     <>
       <HomeBanner movies={movies} />
@@ -56,8 +55,8 @@ const page = async () => {
           actionHref="/movies"
         />
         <HomeExtiraMovies
-          movie_filtered={movie_filtered}
-          ganer_name_cartoons={ganer_name_cartoons}
+          movie_movie_filtered={movie_movie_filtered}
+          ganer_name_movie={ganer_name_movie}
         />
       </div>
 
@@ -69,11 +68,11 @@ const page = async () => {
           actionHref="/cartoons"
         />
         <HomeMovies
-          movie_movie_filtered={movie_movie_filtered}
-          ganer_name_movie={ganer_name_movie}
+          movie_filtered={movie_filtered}
+          ganer_name_cartoons={ganer_name_cartoons}
         />
       </div>
-      <HomeTopMovies movies={movies}  />
+      <HomeTopMovies movies={movies} />
 
       <div className="mt-5">
         <SectionHeader
@@ -89,13 +88,20 @@ const page = async () => {
           <h2 className="text-xl font-semibold mb-2">
             Eng yangi tarjima kinolar uzbek tilida!
           </h2>
-          <hr className="text-[#2E3030]"/>
+          <hr className="text-[#2E3030]" />
 
-          <p className="text-sm text-[#888890] leading-relaxed pt-2">Xorijiy va Uzbek filmlari Uzbek tilida</p>
           <p className="text-sm text-[#888890] leading-relaxed pt-2">
-            
+            Xorijiy va Uzbek filmlari Uzbek tilida
+          </p>
+          <p className="text-sm text-[#888890] leading-relaxed pt-2">
             {/* <br> */}
-              Biz barcha qiziqarli va sifatli kino muxlislarini FREEKINO veb-saytimzda kutib olishdan mamnunmiz! Siz ham kinoni biz kabi sevasizmi? Siz doimo yangi mahsulotlarning chiqarilishini kuzatib turasizmi? Bir-ikkita film ko‘rmaydigan bir oqshom ham o‘tmaydimi? Keyin to‘g‘ri joyga keldingiz! Bizning kinoteatrimizda siz onlayn filmlarni bepul va hech qanday cheklovlarsiz tomosha qilishingiz mumkin!
+            Biz barcha qiziqarli va sifatli kino muxlislarini FREEKINO
+            veb-saytimzda kutib olishdan mamnunmiz! Siz ham kinoni biz kabi
+            sevasizmi? Siz doimo yangi mahsulotlarning chiqarilishini kuzatib
+            turasizmi? Bir-ikkita film ko‘rmaydigan bir oqshom ham o‘tmaydimi?
+            Keyin to‘g‘ri joyga keldingiz! Bizning kinoteatrimizda siz onlayn
+            filmlarni bepul va hech qanday cheklovlarsiz tomosha qilishingiz
+            mumkin!
           </p>
         </section>
       </Containers>

@@ -13,7 +13,7 @@ type Props = {
 const HomeTopMoviesBanner = async ({ movies }: Props) => {
     const categories = await getCategory();
     const twoMainCategories = categories?.slice(0,2)
-    console.log(twoMainCategories);
+    // console.log(twoMainCategories);
     
     return (
         <Containers className="flex mt-5 flex-col md:flex-row gap-4 w-full  py-2">

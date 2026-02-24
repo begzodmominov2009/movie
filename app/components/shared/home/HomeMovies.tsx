@@ -6,12 +6,12 @@ import Containers from "../../ui/Containers";
 import MovieCard from "../../ui/MoviesCard";
 
 type Props = {
-  movie_movie_filtered: Movie[];
-  ganer_name_movie: string;
+  movie_filtered: Movie[];
+  ganer_name_cartoons: string;
   visible?: number;
 };
 
-const HomeMovies = ({ movie_movie_filtered, ganer_name_movie, visible = 6 }: Props) => {
+const HomeMovies = ({ movie_filtered, ganer_name_cartoons, visible = 6 }: Props) => {
   return (
     <Containers>
       <SwiperSection<Movie>
@@ -26,11 +26,11 @@ const HomeMovies = ({ movie_movie_filtered, ganer_name_movie, visible = 6 }: Pro
           768: { slidesPerView: 3.7 },
           1024: { slidesPerView: visible },
         }}
-        items={movie_movie_filtered}
+        items={movie_filtered}
         getKey={(m, idx) => (m?.id ? String(m.id) : String(idx))}
         renderItem={(m) => (
           <div className="py-1 gap-0">
-            <MovieCard item={m} ganer_name_movie={ganer_name_movie} />
+            <MovieCard item={m} ganer_name_cartoons={ganer_name_cartoons} />
           </div>
         )}
       />
