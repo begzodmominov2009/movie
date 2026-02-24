@@ -1,21 +1,18 @@
-import { MovieAktor } from '@/types/MoviesActor';
-import Containers from '../components/ui/Containers';
+import Containers from "../components/ui/Containers";
+import { getAktor } from "@/service/useGetMovieActors";
+import { MovieAktor } from "@/types/MoviesActor";
+import HomeActiors from "../components/shared/home/HomeActiors";
 
-
-type Props = {
-  aktors: MovieAktor[];
-};
-
-
-const page = ({aktors}:{aktors: Props}) => {
-
-  
+const Page = async () => {
+  const aktors: MovieAktor[] = await getAktor();
 
   return (
-    <Containers className=''>
-       <h1 className='text-white'>Aktors</h1>
+    <Containers>
+      <h1 className="text-white text-2xl mb-6">Aktors</h1>
+      
+      <HomeActiors aktors={aktors} />
     </Containers>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

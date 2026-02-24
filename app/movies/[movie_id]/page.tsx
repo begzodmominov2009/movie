@@ -66,7 +66,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-[#0b0b0f] text-white">
-      <div className="px-4 md:px-8 py-6">
+      <div className="px-2 md:px-8 py-6">
         <div className="mx-auto max-w-7xl grid grid-cols-12 gap-6">
           <div className="col-span-12 lg:col-span-9">
             <MovieHeroCard

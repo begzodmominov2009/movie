@@ -38,13 +38,13 @@ const page = async () => {
     movies?.filter((el) => movie_genre_filtered.includes(String(el.id))) ?? [];
 
   return (
-    <Containers className="my-5">
+    <Containers className="mb-6 px-0 sm:px-0">
       <div>
         <h1 className="text-[24px] text-[white] font-medium">Multfilmlar</h1>
-        <p className="text-white">Multfilmlar bepul tomosha qiling!</p>
+        <p className="text-white text-[14px]">Multfilmlar bepul tomosha qiling!</p>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
+      <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
         {movie_filtered.map((m) => (
           <MovieCard
             key={m.id}
