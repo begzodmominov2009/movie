@@ -10,13 +10,10 @@ type Props = {
     visible?: number;
 };
 
-const HomeTopMoviesBanner = async ({ movies }: Props) => {
-    const categories = await getCategory();
-    const twoMainCategories = categories?.slice(0,2)
-    console.log(twoMainCategories);
-    
+const HomeTopMoviesBanner = ({ movies }: Props) => {
+
     return (
-        <Containers className="flex mt-5 flex-col md:flex-row gap-4 w-full px-4 py-2">
+        <Containers className="flex mt-5 flex-col md:flex-row gap-4 w-full  py-2">
             {/* LEFT LIST */}
                 <div className="flex-1 border border-[#313433] p-4 rounded-xl bg-[#1D1F1E]">
                     <h2 className="text-white text-2xl font-semibold mb-5 flex items-center gap-3">

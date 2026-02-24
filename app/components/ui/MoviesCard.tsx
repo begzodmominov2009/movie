@@ -59,7 +59,7 @@ export default function MovieCard({
           "relative overflow-hidden rounded-3xl",
           "border border-white/10 bg-white/[0.04]  ring-1 ring-white/10",
           "shadow-[0_18px_60px_rgba(0,0,0,0.55)]",
-          "transition-all duration-200 w-[200px]",
+          "transition-all duration-200 max-w-[200px] w-full",
           "hover:border-white/15 hover:ring-white/15 hover:bg-white/[0.06]",
         ].join(" ")}
       >

@@ -23,7 +23,7 @@ export default function RecommendedSidebar({
 
   const filteredMovieIds =movie_genre?.filter((x) => x.genre_id === ganreMovieId)?.map((x) => String(x.movie_id)) ?? [];
 
-  const movieFiltered =movies?.filter((m) => filteredMovieIds.includes(String(m.id))) ?? [];
+  const movieFiltered = movies?.filter((m) => filteredMovieIds.includes(String(m.id))) ?? [];
 
   return (
     <div className="relative rounded-3xl max-h-[385px] overflow-hidden border border-white/10 bg-white/5">

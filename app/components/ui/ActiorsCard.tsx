@@ -24,7 +24,6 @@ export function MovieActorCard({
       ].join(" ")}
     >
       <div className="w-full h-[190px] rounded-xl overflow-hidden mb-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item.photo_url}
           alt={item.full_name}
