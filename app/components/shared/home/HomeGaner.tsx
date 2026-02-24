@@ -55,18 +55,23 @@ export default function HomeGaner({ ganer }: Props) {
           768: { slidesPerView: 5.2 },
           1024: { slidesPerView: 8 },
         }}
-        items={ganer}
+        items={ganer ?? []}
         getKey={(g) => g?.id}
         renderItem={(g) => (
           <div className="py-1">
-            <Pill active={g?.id === activeId} onClick={() => setActiveId(g.id)}>
-              <img
-                src={g?.icon}
-                alt={g?.name_uz}
-                className="h-4 w-4"
-                style={{ filter: "brightness(0) invert(1)" }}
-                loading="lazy"
-              />
+            <Pill
+              active={g?.id === activeId}
+              onClick={() => g?.id && setActiveId(g.id)}
+            >
+              {g?.icon && (
+                <img
+                  src={g.icon}
+                  alt={g?.name_uz}
+                  className="h-4 w-4"
+                  style={{ filter: "brightness(0) invert(1)" }}
+                  loading="lazy"
+                />
+              )}
 
               <span className="text-[14px] font-medium">{g?.name_uz}</span>
             </Pill>

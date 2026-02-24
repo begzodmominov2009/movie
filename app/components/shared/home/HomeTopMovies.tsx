@@ -3,12 +3,12 @@ import HomeTopMoviesBanner from './components/HomeTop/HomeTopMoviesBanner'
 import { Movie } from '@/types/MoviesDataTypes'
 
 type Props = {
-  movies: Movie[];
+  movies: Movie[],
 };
 
-const HomeTopMovies = ({movies}:Props) => {
+const HomeTopMovies = ({ movies }:Props) => {
   return (
-      <HomeTopMoviesBanner movies={movies}/>
+    <HomeTopMoviesBanner movies={movies} />
   )
 }
 
