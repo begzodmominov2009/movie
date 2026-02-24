@@ -1,4 +1,4 @@
-export interface MovieAktor{
+export interface ActorsType {
     id: string,
     created_at: string,
     full_name: string,
@@ -6,4 +6,4 @@ export interface MovieAktor{
     birth_year: number,
     biography: string,
     country: string
-} 
+}

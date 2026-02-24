@@ -1,5 +1,5 @@
 export interface CountryItem {
-    id: number;
+    id: string;
     title: string;
     count?: string;
     flag: string;

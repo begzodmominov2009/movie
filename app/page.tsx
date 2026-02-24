@@ -4,16 +4,16 @@ import HomeGaner from "./components/shared/home/HomeGaner";
 import HomeMovies from "./components/shared/home/HomeMovies";
 import HomeExtiraMovies from "./components/shared/home/HomeExtiraMovies";
 import HomeTopMovies from "./components/shared/home/HomeTopMovies";
-import HomeCountry from "./components/shared/home/HomeCountry";
 import Containers from "./components/ui/Containers";
 import { Movie } from "@/types/MoviesDataTypes";
 import { getMovies } from "@/service/useGetMovie";
 import { GenerType } from "@/types/GenerTypes";
 import { getGener } from "@/service/useGetGanre";
-import SectionHeader from "./components/ui/SectionHead";
 import { MovieAktor } from "@/types/MoviesActor";
 import { getAktor } from "@/service/useGetMovieActors";
+import SectionHeader from "./components/ui/SectionHead";
 import HomeActiors from "./components/shared/home/HomeActiors";
+import HomeCountry from "./components/shared/home/HomeCountry";
 import { MovieGenre } from "@/types/MovieGanre";
 import { getMovieGenre } from "@/service/useGetMovieGenre";
 

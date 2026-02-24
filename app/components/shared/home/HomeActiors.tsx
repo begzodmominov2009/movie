@@ -1,41 +1,45 @@
 "use client";
 
-import type { MovieAktor } from "@/types/MoviesActor";
-import SwiperSection from "../SwiperSection/SwiperSection";
 import Containers from "../../ui/Containers";
-import { MovieActorCard } from "../../ui/ActiorsCard";
+import { MovieAktor } from "@/types/MoviesActor";
+import Link from "next/link";
+import { FaStar } from "react-icons/fa";
+import { FiArrowRightCircle } from "react-icons/fi";
 
 type Props = {
   aktors: MovieAktor[];
-  visible?: number;
+  className?: string;
 };
 
-const HomeActiors = ({ aktors, visible = 6 }: Props) => {
+function MovieCard({ item }: { item: MovieAktor }) {
   return (
-    <Containers>
-      <SwiperSection<MovieAktor>
-        variant="hero"
-        gap={12} 
-        loop
-        visible={visible}
-        heroBreakpoints={{
-          0: { slidesPerView: 1.5 },
-          480: { slidesPerView: 2.2 },
-          640: { slidesPerView: 3.2 },
-          768: { slidesPerView: 4.2 },
-          1024: { slidesPerView: visible },
-        }}
-        items={aktors}
-        getKey={(m, idx) => String(m.id ?? m.full_name ?? idx)}
-        renderItem={(m) => (
-          <div className="py-1">
-            {/* ✅ har slide ichida faqat bitta actor */}
-            <MovieActorCard item={m} variant="swiper" />
-          </div>
-        )}
-      />
-    </Containers>
-  );
-};
+    <Link href={`/actors/${item.id}`} className="bg-transparent border border-white/20 rounded-2xl group hover:border-white/50 hover:bg-white/2 p-3 transition cursor-pointer max-w-[180px] w-full">
+      <div className="w-full h-[190px] rounded-xl overflow-hidden mb-3">
+        <img
+          src={item.photo_url}
+          alt={item.full_name}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
 
-export default HomeActiors;
+      <h3 className="text-sm font-semibold text-white truncate">
+        {item.full_name}
+      </h3>
+
+      <p className="text-xs text-gray-400">Actor</p>
+    </Link>
+  );
+}
+
+export default function HomeActiors({ aktors, className = "" }: Props) {
+  return (
+    <div className={className}>
+     
+      <Containers className="flex gap-5">
+        {aktors.map((item) => (
+          <MovieCard key={item.id ?? item.full_name} item={item} />
+        ))}
+      </Containers>
+    </div>
+  );
+}

@@ -34,7 +34,7 @@ const HomeMovies = ({ movie_filtered, ganer_name_cartoons, visible = 6 }: Props)
           </div>
         )}
       />
-    </Containers>
+    </Containers >
   );
 };
 
