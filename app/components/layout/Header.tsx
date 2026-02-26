@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { Search, Home, Film, Tv, Moon, Sun, Heart } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Button from "../ui/Button";
 import Containers from "../ui/Containers";
 import ActiveLink from "../ui/ActiveLink";
+import SearchHeader from "../shared/SearchHeader/SearchHeader";
 
 export default function Header() {
   const [isDark, setIsDark] = useState(true);
@@ -22,7 +22,7 @@ export default function Header() {
 
   const bottomItemClass = (href: string) =>
     [
-      "flex-1 min-w-0", // ✅ hammasi teng bo‘ladi
+      "flex-1 min-w-0",
       "flex flex-col items-center justify-center gap-1",
       "py-2 rounded-xl transition",
       isActive(href)
@@ -49,22 +49,8 @@ export default function Header() {
             </div>
 
             {/* CENTER: search (md+) */}
-            <div className="hidden md:flex flex-1 justify-center">
-              <div className="w-full max-w-2xl">
-                <form className="relative">
-                  <input
-                    aria-label="Qidirish"
-                    placeholder="Qidirish..."
-                    className="w-full rounded-full bg-[#161616]/80 dark:bg-[#1A1A1A] border border-transparent focus:outline-none focus:ring-2 focus:ring-[#2b2b2b] px-4 py-2 pl-12 text-sm text-gray-200 placeholder:text-gray-400 transition"
-                  />
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                    <Search size={16} />
-                  </div>
-                  <Button className="absolute right-1 top-1/2 -translate-y-1/2 shadow-sm px-3 py-1.5">
-                    Qidirish
-                  </Button>
-                </form>
-              </div>
+            <div className="hidden md:flex flex-1 px-4">
+              <SearchHeader />
             </div>
 
             {/* RIGHT: nav (md+) */}
@@ -73,17 +59,14 @@ export default function Header() {
                 <Home size={16} />
                 <span className="text-sm">Bosh sahifa</span>
               </ActiveLink>
-
               <ActiveLink href="/movies">
                 <Film size={16} />
                 <span className="text-sm">Kino</span>
               </ActiveLink>
-
               <ActiveLink href="/serials">
                 <Tv size={16} />
                 <span className="text-sm">Serial</span>
               </ActiveLink>
-
               <ActiveLink href="/cartoons">
                 <Film size={16} />
                 <span className="text-sm">Multfilm</span>
@@ -112,22 +95,18 @@ export default function Header() {
             <Home size={22} className={bottomIconClass("/")} />
             <span className="text-[12px]">Home</span>
           </Link>
-
           <Link href="/search" className={bottomItemClass("/search")}>
             <Search size={22} className={bottomIconClass("/search")} />
             <span className="text-[12px]">Qidiruv</span>
           </Link>
-
           <Link href="/movies" className={bottomItemClass("/movies")}>
             <Film size={22} className={bottomIconClass("/movies")} />
             <span className="text-[12px]">Kino</span>
           </Link>
-
           <Link href="/cartoons" className={bottomItemClass("/cartoons")}>
             <Film size={22} className={bottomIconClass("/cartoons")} />
             <span className="text-[12px]">Mult</span>
           </Link>
-
           <Link href="/likes" className={bottomItemClass("/likes")}>
             <Heart size={22} className={bottomIconClass("/likes")} />
             <span className="text-[12px]">Sevimlilar</span>

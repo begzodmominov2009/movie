@@ -3,17 +3,23 @@
 import { MovieAktor } from "@/types/MoviesActor";
 import Link from "next/link";
 
-type MovieActorsGridProps = {
-  aktors: MovieAktor[];
-  className?: string;
-};
-
 type MovieActorCardProps = {
   item: MovieAktor;
+  variant?: "grid" | "list";
   className?: string;
 };
 
-function MovieActorCard({ item, className = "" }: MovieActorCardProps) {
+type MovieActorsProps = {
+  aktors: MovieAktor[];
+  variant?: "grid" | "list";
+  className?: string;
+};
+
+function MovieActorCard({
+  item,
+  variant = "grid",
+  className = "",
+}: MovieActorCardProps) {
   return (
     <div
       className={[
@@ -25,13 +31,15 @@ function MovieActorCard({ item, className = "" }: MovieActorCardProps) {
       ].join(" ")}
     >
       <div className="w-full h-[190px] rounded-xl overflow-hidden mb-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={item.photo_url}
-          alt={item.full_name}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          loading="lazy"
-        />
+        {item.photo_url && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={item.photo_url}
+            alt={item.full_name}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        )}
       </div>
 
       <h3 className="text-sm font-semibold text-white truncate">
@@ -43,24 +51,24 @@ function MovieActorCard({ item, className = "" }: MovieActorCardProps) {
   );
 }
 
-type MovieActorsGridProps = {
-  aktors: MovieAktor[];
-  className?: string;
-};
-
 export default function MovieActors({
   aktors,
+  variant = "grid",
   className = "",
-}: MovieActorsGridProps) {
+}: MovieActorsProps) {
   return (
-    <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 ${className}`}>
-      {aktors?.map((item) => {
-        return (
-          <Link key={item.id} href={`/actors/${item.id}`}>
-            <MovieActorCard item={item} />
-          </Link>
-        );
-      })}
+    <div
+      className={
+        variant === "grid"
+          ? `grid grid-cols-2 md:grid-cols-4 gap-4 ${className}`
+          : `flex gap-4 overflow-x-auto ${className}`
+      }
+    >
+      {aktors?.map((item) => (
+        <Link key={item.id} href={`/actors/${item.id}`}>
+          <MovieActorCard item={item} variant={variant} />
+        </Link>
+      ))}
     </div>
   );
 }
