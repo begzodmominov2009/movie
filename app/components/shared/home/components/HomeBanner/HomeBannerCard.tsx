@@ -10,7 +10,7 @@ type Props = {
 
 const HomeBannerCard = ({ item }: Props) => {
   return (
-    <Link href={`/movies/${item?.id}`}>
+    <Link href={`/movies/${item.id}`}>
       <div className="relative h-[420px] overflow-hidden rounded-[28px] bg-white/5 ring-1 ring-white/10">
         <img
           src={item?.poster_url}
@@ -33,7 +33,7 @@ const HomeBannerCard = ({ item }: Props) => {
             <HomeBannerButton>{item?.language}</HomeBannerButton>
             <HomeBannerButton>{item?.created_by}</HomeBannerButton>
           </div>
-        </div>
+        </div>  
       </div>
     </Link>
   );

@@ -1,25 +1,25 @@
 "use client";
 
-import type { MovieAktor } from "@/types/MoviesActor";
+import { MovieAktor } from "@/types/MoviesActor";
+import Link from "next/link";
 
-type MovieActorCardProps = {
-  item: MovieAktor;
-  variant?: "swiper" | "list";
+type MovieActorsGridProps = {
+  aktors: MovieAktor[];
   className?: string;
 };
 
-export function MovieActorCard({
-  item,
-  variant = "swiper",
-  className = "",
-}: MovieActorCardProps) {
+type MovieActorCardProps = {
+  item: MovieAktor;
+  className?: string;
+};
+
+function MovieActorCard({ item, className = "" }: MovieActorCardProps) {
   return (
     <div
       className={[
         "bg-transparent border border-white/20 rounded-2xl",
         "group hover:border-white/50 hover:bg-white/5",
         "p-3 transition cursor-pointer",
-        variant === "list" ? "w-[200px] shrink-0" : "w-full",
         className,
       ].join(" ")}
     >
@@ -41,24 +41,21 @@ export function MovieActorCard({
   );
 }
 
-type MovieActorsGridProps = {
-  aktors: MovieAktor[];
-  className?: string;
-};
+
 
 export default function MovieActors({
   aktors,
   className = "",
 }: MovieActorsGridProps) {
   return (
-    <div className={className}>
-      {aktors?.map((item) => (
-        <MovieActorCard
-          key={String(item.id ?? item.full_name)}
-          item={item}
-          variant="list"
-        />
-      ))}
+    <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 ${className}`}>
+      {aktors?.map((item) => {
+        return (
+          <Link key={item.id} href={`/actors/${item.id}`}>
+            <MovieActorCard item={item} />
+          </Link>
+        );
+      })}
     </div>
   );
 }

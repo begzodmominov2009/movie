@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Containers from "../../ui/Containers";
 import SwiperSection from "../SwiperSection/SwiperSection";
 import type { GenerType } from "@/types/GenerTypes";
+import { useRouter } from "next/navigation";
 
 function Pill({
   active,
@@ -38,6 +39,7 @@ type Props = {
 };
 
 export default function HomeGaner({ ganer }: Props) {
+  const router = useRouter();
   const [activeId, setActiveId] = useState<string>(ganer?.[0]?.id ?? "");
 
   return (
@@ -55,19 +57,28 @@ export default function HomeGaner({ ganer }: Props) {
           768: { slidesPerView: 5.2 },
           1024: { slidesPerView: 8 },
         }}
-        items={ganer}
+        items={ganer ?? []}
         getKey={(g) => g?.id}
         renderItem={(g) => (
           <div className="py-1">
-            <Pill active={g?.id === activeId} onClick={() => setActiveId(g.id)}>
-              <img
-                src={g?.icon}
-                alt={g?.name_uz}
-                className="h-4 w-4"
-                style={{ filter: "brightness(0) invert(1)" }}
-                loading="lazy"
-              />
-
+            <Pill
+              active={g?.id === activeId}
+              onClick={() => {
+                if (g?.id) {
+                  setActiveId(g.id);
+                  router.push(`/movies/genre/${g?.id}`);
+                }
+              }}
+            >
+              {g?.icon && (
+                <img
+                  src={g.icon}
+                  alt={g?.name_uz}
+                  className="h-4 w-4"
+                  style={{ filter: "brightness(0) invert(1)" }}
+                  loading="lazy"
+                />
+              )}
               <span className="text-[14px] font-medium">{g?.name_uz}</span>
             </Pill>
           </div>
