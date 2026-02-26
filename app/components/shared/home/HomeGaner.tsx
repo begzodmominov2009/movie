@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Containers from "../../ui/Containers";
 import SwiperSection from "../SwiperSection/SwiperSection";
 import type { GenerType } from "@/types/GenerTypes";
+import { useRouter } from "next/navigation";
 
 function Pill({
   active,
@@ -38,6 +39,7 @@ type Props = {
 };
 
 export default function HomeGaner({ ganer }: Props) {
+  const router = useRouter();
   const [activeId, setActiveId] = useState<string>(ganer?.[0]?.id ?? "");
 
   return (
@@ -61,7 +63,12 @@ export default function HomeGaner({ ganer }: Props) {
           <div className="py-1">
             <Pill
               active={g?.id === activeId}
-              onClick={() => g?.id && setActiveId(g.id)}
+              onClick={() => {
+                if (g?.id) {
+                  setActiveId(g.id);
+                  router.push(`/movies/genre/${g?.id}`);
+                }
+              }}
             >
               {g?.icon && (
                 <img
@@ -72,7 +79,6 @@ export default function HomeGaner({ ganer }: Props) {
                   loading="lazy"
                 />
               )}
-
               <span className="text-[14px] font-medium">{g?.name_uz}</span>
             </Pill>
           </div>

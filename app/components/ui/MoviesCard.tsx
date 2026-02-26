@@ -34,7 +34,7 @@ const ClockIcon = () => (
 
 type Props = {
   item: Movie;
-  movie_filtered?: Movie[]
+  movie_filtered?: Movie[];
   ganer_name_cartoons?: string;
   ganer_name_movie?: string;
 };
@@ -106,8 +106,7 @@ export default function MovieCard({
           {item?.title_uz || item?.title_uz || item?.title_ru || "—"}
         </h3>
         <p className="mt-1 text-[13px] text-white/55">
-          {item?.created_by} • {ganer_name_cartoons}{" "}
-          {ganer_name_movie}
+          {item?.created_by} • {ganer_name_cartoons} {ganer_name_movie}
         </p>
       </div>
     </Link>

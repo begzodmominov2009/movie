@@ -7,11 +7,15 @@ import MovieCard from "../../ui/MoviesCard";
 
 type Props = {
   movie_filtered: Movie[];
-  ganer_name_cartoons: string;
+  ganer_name_cartoons?: string;
   visible?: number;
 };
 
-const HomeMovies = ({ movie_filtered, ganer_name_cartoons, visible = 6 }: Props) => {
+const HomeMovies = ({
+  movie_filtered,
+  ganer_name_cartoons,
+  visible = 6,
+}: Props) => {
   return (
     <Containers>
       <SwiperSection<Movie>
@@ -34,7 +38,7 @@ const HomeMovies = ({ movie_filtered, ganer_name_cartoons, visible = 6 }: Props)
           </div>
         )}
       />
-    </Containers >
+    </Containers>
   );
 };
 

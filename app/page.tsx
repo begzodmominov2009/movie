@@ -24,24 +24,28 @@ const page = async () => {
   const aktors: MovieAktor[] = await getAktor();
 
   // ganer_cartoons_card_filter
-  const ganer_cartoons = ganer?.[7].id;
-  const ganer_name_cartoons = ganer?.[7].name_uz;
-  const movie_genre_filtered =
-    movie_genre
-      ?.filter((item) => item?.genre_id === ganer_cartoons)
-      ?.map((item) => String(item?.movie_id)) ?? [];
-  const movie_filtered =
-    movies?.filter((el) => movie_genre_filtered.includes(String(el.id))) ?? [];
+  const ganer_cartoons = ganer?.find((el) => el.name_uz === "Multfilmlar")?.id;
+  const ganer_name_cartoons = ganer?.find(
+    (el) => el.name_uz === "Multfilmlar",
+  )?.name_uz;
+  const movie_genre_filtered = movie_genre
+    ?.filter((el) => el.genre_id === ganer_cartoons)
+    ?.map((el) => String(el.movie_id));
+  const movie_filtered = movies?.filter((el) =>
+    movie_genre_filtered?.includes(String(el?.id)),
+  );
 
   // ganer_movie_card_filter
-  const ganer_movie = ganer?.[0].id;
-  const ganer_name_movie = ganer?.[0].name_uz;
+  const ganer_movie = ganer?.find((el) => el.name_uz === "Fantastika")?.id;
+  const ganer_name_movie = ganer?.find((el) => el.name_uz === "Fantastika")?.name_uz;
   const genre_movie_filtered =
     movie_genre
       ?.filter((item) => item?.genre_id === ganer_movie)
       ?.map((item) => String(item?.movie_id)) ?? [];
   const movie_movie_filtered =
-    movies?.filter((el) => genre_movie_filtered.includes(String(el.id))) ?? [];
+    movies?.filter((el) => genre_movie_filtered.includes(String(el?.id))) ?? [];
+  console.log(movie_movie_filtered);
+
   return (
     <>
       <HomeBanner movies={movies} />

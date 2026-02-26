@@ -9,7 +9,7 @@ import { MovieGenre } from "@/types/MovieGanre";
 
 type Props = {
   movie_movie_filtered: Movie[];
-  ganer_name_movie: string;
+  ganer_name_movie?: string;
   visible?: number;
 };
 

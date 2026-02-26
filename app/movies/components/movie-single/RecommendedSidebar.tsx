@@ -12,6 +12,16 @@ type Props = {
   movie_genre: MovieGenre[];
 };
 
+// ✅ Shuffle funksiyasi
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 export default function RecommendedSidebar({
   movies,
   ganreMovie,
@@ -21,13 +31,18 @@ export default function RecommendedSidebar({
 
   const ganreMovieId = ganreMovie?.[0]?.id;
 
-  const filteredMovieIds =movie_genre?.filter((x) => x.genre_id === ganreMovieId)?.map((x) => String(x.movie_id)) ?? [];
+  const filteredMovieIds =
+    movie_genre
+      ?.filter((x) => x.genre_id === ganreMovieId)
+      ?.map((x) => String(x.movie_id)) ?? [];
 
-  const movieFiltered = movies?.filter((m) => filteredMovieIds.includes(String(m.id))) ?? [];
+  // ✅ random qilish shu yerda
+  const movieFiltered = shuffleArray(
+    movies?.filter((m) => filteredMovieIds.includes(String(m.id))) ?? [],
+  );
 
   return (
     <div className="relative rounded-3xl max-h-[385px] overflow-hidden border border-white/10 bg-white/5">
-      {/* ✅ Loading overlay */}
       {pending && (
         <div className="absolute inset-0 z-10 bg-black/45 backdrop-blur-sm flex items-center justify-center">
           <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-sm text-white/90">
@@ -50,11 +65,10 @@ export default function RecommendedSidebar({
             key={String(r.id)}
             href={`/movies/${r.id}`}
             prefetch
-            onClick={() => setPending(true)} // ✅ click bo‘lsa loading chiqadi
+            onClick={() => setPending(true)}
             className="flex gap-3 rounded-2xl border border-white/10 bg-black/25 hover:bg-black/35 transition p-3"
           >
             <div className="h-16 w-12 rounded-xl overflow-hidden bg-white/10 shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={r.poster_url || ""}
                 alt={r.title_uz || r.title_en || "Movie"}
@@ -71,7 +85,6 @@ export default function RecommendedSidebar({
                 {r.created_by ?? "—"} • {r.duration_minutes ?? "—"} daq
               </div>
 
-              {/* janrlarni chip qilib chiqaramiz */}
               <div className="mt-2 flex flex-wrap gap-2">
                 {ganreMovie?.slice(0, 2).map((el) => (
                   <span
