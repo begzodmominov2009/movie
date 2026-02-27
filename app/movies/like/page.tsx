@@ -29,8 +29,6 @@ const page = () => {
     fetchLikedMovies();
   }, []);
 
-  if (loading) return <div className="text-white p-5">Loading...</div>;
-
   return (
     <Containers className="mt-5">
       {likedMovies.length > 0 && (

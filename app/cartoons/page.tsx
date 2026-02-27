@@ -19,38 +19,33 @@ const page = async () => {
       getGener(),
       getMovieGenre(),
     ]);
-  } catch (e) {
-  }
+  } catch (e) {}
 
-  const cartoonsGenre =
-    ganer?.find((g) => g.name_uz === "Multfilm" || g.slug === "cartoons") ??
-    ganer?.[7];
-  const ganer_cartoons = cartoonsGenre?.id;
-  const ganer_name_cartoons = cartoonsGenre?.name_uz ?? "Multfilmlar";
+  const cartoons_id = ganer?.find((g) => g.name_uz === "Multfilmlar")?.id;
+  const cartoons_name = ganer?.find(
+    (e) => e.name_uz === "Multfilmlar",
+  )?.name_uz;
+  const filteredMovieGanre = movie_genre
+    .filter((el) => el.genre_id === cartoons_id)
+    .map((el) => String(el.movie_id));
 
-  const movie_genre_filtered = ganer_cartoons
-    ? (movie_genre
-        ?.filter((item) => item.genre_id === ganer_cartoons)
-        ?.map((item) => String(item.movie_id)) ?? [])
-    : [];
-
-  const movie_filtered =
-    movies?.filter((el) => movie_genre_filtered.includes(String(el.id))) ?? [];
+  const filteredMovie = movies.filter((e) =>
+    filteredMovieGanre?.includes(e?.id),
+  );
+  console.log(filteredMovie);
 
   return (
     <Containers className="mb-6 px-0 sm:px-0">
       <div>
         <h1 className="text-[24px] text-[white] font-medium">Multfilmlar</h1>
-        <p className="text-white text-[14px]">Multfilmlar bepul tomosha qiling!</p>
+        <p className="text-white text-[14px]">
+          Multfilmlar bepul tomosha qiling!
+        </p>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-        {movie_filtered.map((m) => (
-          <MovieCard
-            key={m.id}
-            item={m}
-            ganer_name_cartoons={ganer_name_cartoons}
-          />
+      <div className="mt-5 grid grid-cols-2 min-[435px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {filteredMovie.map((m) => (
+          <MovieCard key={m.id} item={m} ganer_name_cartoons={cartoons_name} />
         ))}
       </div>
     </Containers>

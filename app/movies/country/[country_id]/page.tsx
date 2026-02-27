@@ -1,46 +1,45 @@
 import Containers from "@/app/components/ui/Containers";
-import MovieCard from "@/app/components/ui/MoviesCard";
+import CountrCart from "@/app/components/ui/CountrCart";
 import { getMovies } from "@/service/useGetMovie";
+import NewMoviesClient from "../../components/NewMoviesClient";
 
-type PageProps = {
-  params: {
-    country_id: string;
-  };
-};
+const page = async ({
+  params,
+}: {
+  params: Promise<{ country_id: string }>;
+}) => {
+  const { country_id } = await params;
 
-// 🔹 barcha variantlarni bitta nomga keltiramiz
-const normalizeCountry = (value: string) => {
-  const v = value.trim().toUpperCase();
+  const allMovies = await getMovies();
 
-  if (["USA", "US", "USE", "AQSH"].includes(v)) return "USA";
-  if (["FRANCE", "FR"].includes(v)) return "FRANCE";
-  if (["BELGIUM", "BE"].includes(v)) return "BELGIUM";
-
-  return v;
-};
-
-const Country = async ({ params }: PageProps) => {
-  const { country_id } = params;
-
-  const movies = await getMovies();
-
-  const selectedCountry = normalizeCountry(country_id);
-
-  const moviesFiltered = movies.filter((movie) => {
-    if (!movie.country) return false;
-
-    const countries = movie.country.split(",").map((c) => normalizeCountry(c));
-
-    return countries.includes(selectedCountry);
-  });
+  // faqat shu country kinolari va created_by uchun default qiymat
+  const countryMovies = allMovies
+    .filter((el) => el.country === country_id)
+    .map((el) => ({
+      ...el,
+      created_by: el.created_by ?? 0, // undefined bo'lsa 0 qo'yiladi
+    }));
 
   return (
-    <Containers className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-      {moviesFiltered.map((movie) => (
-        <MovieCard key={movie.id} item={movie} />
-      ))}
+    <Containers>
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <h1 className="text-white text-2xl font-semibold">
+          {country_id}
+        </h1>
+      </div>
+
+      {/* Description */}
+      <div className="text-gray-600 my-2">
+        {country_id} kinolarini tomosha qiling!
+      </div>
+
+      {/* 👇 Yangi tugma + kinolar (CLIENT) */}
+      <NewMoviesClient movies={countryMovies} />
+
+      <CountrCart />
     </Containers>
   );
 };
 
-export default Country;
+export default page;

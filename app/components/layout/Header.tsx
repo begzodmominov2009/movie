@@ -15,6 +15,20 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
+    const update = () => {
+      const likes = getLikes();
+      setLikedCount(likes.length);
+    };
+
+    update(); // page load
+    window.addEventListener("likeUpdated", update);
+
+    return () => {
+      window.removeEventListener("likeUpdated", update);
+    };
+  }, []);
+
+  useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
   }, [isDark]);
 

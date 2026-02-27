@@ -15,6 +15,7 @@ import { getMovieActor } from "@/service/useGetMovie_Actors";
 import { MovieAktor } from "@/types/MoviesActor";
 import { getAktor } from "@/service/useGetMovieActors";
 import { getMovies } from "@/service/useGetMovie";
+import CountrCart from "@/app/components/ui/CountrCart";
 
 type PageProps = {
   params: Promise<{ movie_id: string }>;
@@ -81,6 +82,8 @@ export default async function Page({ params }: PageProps) {
               title={title}
               description={description}
             />
+
+            <CountrCart/>
           </div>
 
           <aside className="col-span-12 lg:col-span-3">
