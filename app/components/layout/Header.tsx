@@ -128,7 +128,7 @@ export default function Header() {
       </header>
 
       {/* BOTTOM HEADER (MOBILE ONLY) */}
-      <div className="md:hidden fixed bottom-0 py-2 left-0 right-0 z-50 border-t border-white/10 bg-[linear-gradient(180deg,#121417_0px,#0e1012_32px,#0b0c0e_64px)] backdrop-blur">
+      <div className="md:hidden fixed bottom-0 py-2 px-2 left-0 right-0 z-50 border-t border-white/10 bg-[linear-gradient(180deg,#121417_0px,#0e1012_32px,#0b0c0e_64px)] backdrop-blur">
         <div className="grid grid-cols-5 h-14">
           <Link href="/" className={bottomItemClass("/")}>
             <Home size={20} className={bottomIconClass("/")} />
