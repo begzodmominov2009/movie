@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import type { Movie } from "@/types/MoviesDataTypes";
 import { IoPlayCircleOutline } from "react-icons/io5";
-import { MovieGenre } from "@/types/MovieGanre";
 
 const StarIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -34,7 +33,6 @@ const ClockIcon = () => (
 
 type Props = {
   item: Movie;
-  movie_filtered?: Movie[];
   ganer_name_cartoons?: string;
   ganer_name_movie?: string;
 };
@@ -45,6 +43,7 @@ export default function MovieCard({
   ganer_name_movie,
 }: Props) {
   const [hover, setHover] = useState(false);
+  const [loading, setLoading] = useState(false); // loading state
 
   return (
     <Link
@@ -53,11 +52,17 @@ export default function MovieCard({
       className="block w-full"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={(e) => {
+        e.preventDefault(); // avval linkni prevent qilamiz
+        setLoading(true); // spinnerni yoqamiz
+        // real navigation keyin ishlaydi
+        window.location.href = `/movies/${item?.id}`;
+      }}
     >
       <div
         className={[
           "relative overflow-hidden rounded-3xl",
-          "border border-white/10 bg-white/[0.04]  ring-1 ring-white/10",
+          "border border-white/10 bg-white/[0.04] ring-1 ring-white/10",
           "shadow-[0_18px_60px_rgba(0,0,0,0.55)]",
           "transition-all duration-200 max-w-[200px] w-full",
           "hover:border-white/15 hover:ring-white/15 hover:bg-white/[0.06]",
@@ -66,7 +71,7 @@ export default function MovieCard({
         <div className="aspect-[4/5]">
           <img
             src={item?.poster_url}
-            alt={item?.title_uz || item?.title_uz || "Movie"}
+            alt={item?.title_uz || "Movie"}
             loading="lazy"
             className={[
               "h-full w-full object-cover transition duration-300",
@@ -85,25 +90,28 @@ export default function MovieCard({
           {item?.duration_minutes ?? "—"} min
         </span>
 
+        {/* Hover overlay + Play / Spinner */}
         <div
           className={[
-            "absolute inset-0 grid place-items-center",
-            "transition-opacity duration-300",
-            hover ? "opacity-100" : "opacity-0",
+            "absolute inset-0 grid place-items-center transition-opacity duration-300",
+            hover || loading ? "opacity-100" : "opacity-0",
           ].join(" ")}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
           <div className="relative grid h-[52px] w-[52px] place-items-center rounded-full bg-white/85 ring-4 ring-white/20">
-            <span className="text-green-500">
-              <IoPlayCircleOutline className="w-7 h-7" />
-            </span>
+            {loading ? (
+              // Spinner (huddi play icon o'lchamida)
+              <div className="w-7 h-7 border-2 border-green-500 border-t-transparent border-b-transparent rounded-full animate-spin"></div>
+            ) : (
+              <IoPlayCircleOutline className="w-7 h-7 text-green-500" />
+            )}
           </div>
         </div>
       </div>
 
       <div className="mt-4">
         <h3 className="line-clamp-1 text-[16px] sm:text-[17px] md:text-[18px] font-semibold text-white leading-tight">
-          {item?.title_uz || item?.title_uz || item?.title_ru || "—"}
+          {item?.title_uz || item?.title_ru || "—"}
         </h3>
         <p className="mt-1 text-[13px] text-white/55">
           {item?.created_by} • {ganer_name_cartoons} {ganer_name_movie}

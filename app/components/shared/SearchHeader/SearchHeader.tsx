@@ -5,14 +5,15 @@ import { Search } from "lucide-react";
 import Button from "../../ui/Button";
 import Containers from "../../ui/Containers";
 import { getMovies } from "@/service/useGetMovie";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SearchHeader = () => {
   const [searchValue, setSearchValue] = useState("");
   const [movies, setMovies] = useState<any[]>([]);
   const [filteredMovies, setFilteredMovies] = useState<any[]>([]);
+  const router = useRouter();
+  
 
-  // Moviesni fetch qilamiz
   useEffect(() => {
     const fetchMovies = async () => {
       const data = await getMovies();
@@ -21,50 +22,44 @@ const SearchHeader = () => {
     fetchMovies();
   }, []);
 
-  // 🔹 Debounce uchun useEffect
   useEffect(() => {
-    // Agar input bo'sh bo'lsa cardlar yo'q bo'lsin
     if (!searchValue.trim()) {
       setFilteredMovies([]);
       return;
     }
 
-    // Timeout set qilamiz
     const timer = setTimeout(() => {
       const value = searchValue.trim().toLowerCase();
       const filtered = movies.filter((movie) =>
         movie.title_uz?.toLowerCase().includes(value),
       );
       setFilteredMovies(filtered);
-    }, 500); // 2 sekund kechikish
+    }, 300);
 
-    // Cleanup - input o'zgarsa oldingi timeoutni bekor qilamiz
     return () => clearTimeout(timer);
   }, [searchValue, movies]);
 
-  // 🔹 Manual search button
-  const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const value = searchValue.trim().toLowerCase();
-
-    if (!value) {
-      setFilteredMovies([]);
-      return;
+  const handleSearch = () => {
+    const value = searchValue.trim();
+    if (!value) return;
+    if (value.trim()) {
+      router.push(`/movies/search/${encodeURIComponent(value)}`);
     }
+    setSearchValue("");
+    setFilteredMovies([]);
+  };
 
-    const filtered = movies.filter((movie) =>
-      movie.title_uz?.toLowerCase().includes(value),
-    );
-    setFilteredMovies(filtered);
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") handleSearch();
   };
 
   return (
     <Containers className="flex flex-col max-w-2xl gap-4 relative">
-      {/* Search bar */}
       <div className="w-full relative">
         <input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
+          onKeyDown={handleKeyPress}
           placeholder="Qidirish..."
           className="w-full rounded-full bg-[#161616]/80 dark:bg-[#1A1A1A] border border-transparent focus:outline-none focus:ring-2 focus:ring-[#2b2b2b] px-4 py-2 pl-12 text-sm text-gray-200 placeholder:text-gray-400 transition"
         />
@@ -74,27 +69,25 @@ const SearchHeader = () => {
         <Button
           type="button"
           onClick={handleSearch}
-          className="absolute right-1 top-1/2 -translate-y-1/2 shadow-sm px-3 py-1.5"
+          className="absolute right-1 top-1/2 -translate-y-1/2 shadow-sm px-3 py-1.5 flex items-center gap-1"
         >
-          Qidirish
+          <Search size={16} /> Qidirish
         </Button>
       </div>
 
-      {/* Search results */}
-      {/* Search results */}
       {searchValue.trim() !== "" && (
         <div
           className={`grid grid-cols-1 px-2 py-2 absolute top-11 rounded-md bg-[#161616]/80 dark:bg-[#1A1A1A] w-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[320px] overflow-y-auto custom-scroll pb-1`}
         >
           {filteredMovies.length > 0 ? (
             filteredMovies.map((movie) => (
-              <Link
-                href={`/movies/${movie?.id}`}
+              <div
+                key={movie.id}
                 onClick={() => {
+                  router.push(`/movies/${movie.id}`);
                   setFilteredMovies([]);
                   setSearchValue("");
                 }}
-                key={movie.id}
                 className="bg-[#1a1a1a] rounded-xl overflow-hidden shadow-md hover:shadow-lg transition cursor-pointer flex flex-col"
               >
                 <div className="w-full h-48 overflow-hidden">
@@ -112,7 +105,7 @@ const SearchHeader = () => {
                     {movie.description_uz}
                   </p>
                 </div>
-              </Link>
+              </div>
             ))
           ) : (
             <p className="text-gray-400 col-span-full text-center">

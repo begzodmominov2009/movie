@@ -9,7 +9,7 @@ export default function Footer() {
       <Containers>
         {/* Top */}
         <div className="flex flex-col gap-10 py-14 lg:flex-row lg:justify-between">
-          {/* Left: logo + text */}
+          {/* Left */}
           <div className="flex-1">
             <div className="inline-flex items-center gap-2">
               <div className="text-[34px] font-extrabold leading-none tracking-tight">
@@ -31,15 +31,12 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Right: columns */}
-          {/* Right: columns */}
-          <div className="flex flex-col gap-35 sm:flex-row sm:justify-between flex-1">
-            {/* Column 2: YearMovie */}
+          {/* Right */}
+          <div className="flex flex-col gap-10 sm:flex-row sm:justify-between flex-1">
             <div className="flex-1">
               <YearMovie />
             </div>
 
-            {/* Column 3: Contact */}
             <div className="flex-1">
               <h4 className="text-[15px] font-semibold text-white/85">
                 Aloqa / Contact
