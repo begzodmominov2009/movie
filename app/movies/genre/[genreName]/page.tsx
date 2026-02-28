@@ -38,9 +38,6 @@ const Page = ({ params }: PageProps) => {
       setGenreNameNew(singleGener?.name_uz);
       console.log(singleGener);
 
-      // const genre = allMovieGenres?.find((el: MovieGenre) => el.genre_id === gName);
-      // setCurrentGenre(genre);
-
       const genreMovieIds = allMovieGenres?.map((el: MovieGenre) => {
         if (el.genre_id === gName) return el.movie_id;
       });
