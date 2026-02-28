@@ -6,14 +6,16 @@ import Link from "next/link";
 type MovieActorsGridProps = {
   aktors: MovieAktor[];
   className?: string;
+  variant?: "grid" | "list"; // grid yoki list ko‘rinishi
 };
 
 type MovieActorCardProps = {
   item: MovieAktor;
+  variant?: "grid" | "list"; // variant prop
   className?: string;
 };
 
-function MovieActorCard({ item, className = "" }: MovieActorCardProps) {
+function MovieActorCard({ item, variant = "grid", className = "" }: MovieActorCardProps) {
   return (
     <div
       className={[
@@ -43,24 +45,21 @@ function MovieActorCard({ item, className = "" }: MovieActorCardProps) {
   );
 }
 
-type MovieActorsGridProps = {
-  aktors: MovieAktor[];
-  className?: string;
-};
-
 export default function MovieActors({
   aktors,
   className = "",
+  variant = "grid",
 }: MovieActorsGridProps) {
   return (
-    <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 ${className}`}>
-      {aktors?.map((item) => {
-        return (
-          <Link key={item.id} href={`/actors/${item.id}`}>
-            <MovieActorCard item={item} />
-          </Link>
-        );
-      })}
+    <div
+      className={`${variant === "list" ? "flex gap-4 overflow-x-auto" : "grid grid-cols-2 md:grid-cols-4 gap-4"
+        } ${className}`}
+    >
+      {aktors?.map((item) => (
+        <Link key={item.id} href={`/actors/${item.id}`}>
+          <MovieActorCard item={item} variant={variant} />
+        </Link>
+      ))}
     </div>
   );
 }
